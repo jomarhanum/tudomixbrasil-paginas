@@ -1,0 +1,610 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dormistória – Histórias para Dormir no WhatsApp</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0d1117; --bg2:#111820; --bg3:#0a0e14;
+  --card:#161e28; --card2:#1a2433;
+  --yellow:#f5c842; --green:#4ade80;
+  --text:#e8edf5; --muted:#8a9ab5;
+  --border:rgba(245,200,66,0.18);
+  --shadow:0 8px 32px rgba(0,0,0,0.45);
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.65;overflow-x:hidden}
+h1,h2,h3{font-family:'Playfair Display',serif}
+
+.wrap{width:100%;max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* LOGO */
+.logo{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--yellow);letter-spacing:-.5px}
+.logo span{color:#fff}
+.logo .w{color:#fff}
+
+/* BTN */
+.btn{display:block;width:100%;background:var(--yellow);color:#000;font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700;padding:18px 24px;border:none;border-radius:var(--r);cursor:pointer;text-align:center;text-decoration:none;box-shadow:0 6px 24px rgba(245,200,66,0.4);transition:transform .15s,box-shadow .15s;letter-spacing:.3px}
+.btn:hover{box-shadow:0 8px 32px rgba(245,200,66,0.55);transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn-wrap{max-width:480px}
+
+/* SECTION */
+section{padding:64px 0}
+section.alt{background:var(--bg2)}
+section.dark{background:var(--bg3)}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;display:block}
+.sec-title{font-size:clamp(22px,3.5vw,36px);line-height:1.2;font-weight:900;color:#fff;margin-bottom:28px}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:12px;padding:0 24px}
+.divider-line{flex:1;height:1px;background:rgba(255,255,255,0.06)}
+.divider-star{color:var(--yellow);font-size:18px}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(160deg,#0d1117 55%,#1a2433);padding:56px 24px 64px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(245,200,66,0.13),transparent);pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:40px;align-items:center}
+.hero-text{text-align:center;width:100%}
+.hero-text h1{font-size:clamp(28px,4.5vw,44px);line-height:1.15;font-weight:900;color:#fff;margin:18px 0 16px}
+.hero-text h1 em{color:var(--yellow);font-style:normal}
+.hero-sub{color:var(--muted);font-size:16px;margin-bottom:8px}
+.hero-sub2{color:var(--muted);font-size:15px;margin-bottom:26px}
+.hero-right{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%}
+
+/* phone */
+.phone-wrap{position:relative;display:inline-block}
+.phone{width:210px;background:#111;border-radius:32px;border:3px solid #2a3545;box-shadow:0 24px 64px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.05);overflow:hidden}
+.phone-top{background:#1a1a1a;height:28px;display:flex;align-items:center;justify-content:center;gap:6px}
+.phone-dot{width:8px;height:8px;border-radius:50%;background:#333}
+.phone-screen{background:#e5ddd5;padding:12px 10px;min-height:260px}
+.wa-header{background:#075e54;padding:8px 10px;display:flex;align-items:center;gap:8px;margin:-12px -10px 10px}
+.wa-avatar{width:30px;height:30px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#075e54}
+.wa-name{color:#fff;font-size:12px;font-weight:600}
+.wa-bubble{background:#fff;border-radius:0 8px 8px 8px;padding:10px 12px;font-size:12px;color:#333;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,0.13);position:relative}
+.wa-bubble::before{content:'';position:absolute;left:-6px;top:0;border:6px solid transparent;border-right-color:#fff;border-top-color:#fff}
+.wa-bubble strong{color:#075e54;font-size:11px;display:block;margin-bottom:3px}
+.wa-time{color:#999;font-size:10px;text-align:right;margin-top:4px}
+.star-badge{position:absolute;top:-10px;right:-14px;background:var(--yellow);color:#000;font-weight:700;font-size:10px;padding:5px 10px;border-radius:20px;transform:rotate(8deg);box-shadow:0 4px 12px rgba(245,200,66,0.5);white-space:nowrap}
+.sleeping-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.3);color:var(--green);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px}
+
+.filter-list{list-style:none;text-align:left;width:100%;margin-bottom:26px}
+.filter-list li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:15px;color:var(--muted)}
+.filter-list li .icon{font-size:18px;flex-shrink:0;margin-top:1px}
+
+/* ── CARDS ── */
+.id-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r);padding:16px 18px;display:flex;align-items:flex-start;gap:14px;box-shadow:var(--shadow)}
+.id-icon{font-size:24px;flex-shrink:0;margin-top:1px}
+.id-text{font-size:15px;color:var(--text)}
+.id-close{background:var(--card2);border-left:3px solid var(--yellow);border-radius:0 12px 12px 0;padding:16px 18px;font-size:15px;margin-top:20px;color:var(--text)}
+
+/* PROOF */
+.wa-proof{background:#e5ddd5;border-radius:16px;padding:16px}
+.wa-proof-header{background:#075e54;border-radius:10px 10px 0 0;padding:10px 14px;display:flex;align-items:center;gap:10px;margin:-16px -16px 12px}
+.proof-avatar{width:34px;height:34px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-weight:700;color:#075e54;font-size:14px}
+.proof-name{color:#fff;font-size:13px;font-weight:600}
+.wa-msg{background:#fff;border-radius:0 10px 10px 10px;padding:10px 13px;font-size:14px;color:#333;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,0.1);position:relative}
+.wa-msg::before{content:'';position:absolute;left:-6px;top:0;border:6px solid transparent;border-right-color:#fff;border-top-color:#fff}
+.checkmarks{color:#53bdeb;font-size:12px;float:right;margin-left:8px}
+.proof-caption{text-align:center;font-size:13px;color:var(--muted);margin-top:20px;font-style:italic}
+
+/* DOR */
+.pain-open{font-size:17px;color:var(--text);margin-bottom:20px;line-height:1.7}
+.thought-bubble{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r);padding:16px 18px 16px 44px;font-size:15px;color:var(--muted);position:relative}
+.thought-bubble::before{content:'💭';position:absolute;left:14px;top:14px;font-size:18px}
+.diagnosis{background:linear-gradient(135deg,rgba(245,200,66,0.1),rgba(245,200,66,0.04));border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-top:24px;font-size:16px;color:var(--text);line-height:1.7}
+.diagnosis strong{color:var(--yellow)}
+
+/* TRANSIÇÃO */
+.transition-block{background:linear-gradient(135deg,#1a2433,#0d1117);border-left:4px solid var(--yellow);border-radius:0 var(--r) var(--r) 0;padding:24px 20px;margin-bottom:20px}
+.transition-block p{font-size:clamp(17px,2.5vw,22px);color:#fff;font-family:'Playfair Display',serif;line-height:1.4}
+.warning-box{background:rgba(255,80,80,0.08);border:1px solid rgba(255,80,80,0.2);border-radius:12px;padding:16px 18px;font-size:15px;color:#ff9999;margin-bottom:20px}
+
+/* STEP CARDS */
+.step-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px 20px 20px 72px;position:relative;box-shadow:var(--shadow)}
+.step-num{position:absolute;left:20px;top:20px;width:36px;height:36px;background:var(--yellow);color:#000;font-weight:900;font-size:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif}
+.step-title{font-weight:700;color:#fff;font-size:17px;margin-bottom:4px}
+.step-desc{color:var(--muted);font-size:15px}
+
+/* BENEFÍCIOS */
+.benefit-item{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:16px}
+.benefit-item:last-child{border-bottom:none}
+.check{width:24px;height:24px;flex-shrink:0;background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:13px;font-weight:700;margin-top:2px}
+
+/* STACK */
+.stack-card{background:var(--card);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r);padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
+.stack-icon{font-size:28px;flex-shrink:0}
+.stack-title{font-weight:700;color:#fff;font-size:16px;margin-bottom:3px}
+.stack-desc{font-size:14px;color:var(--muted)}
+
+/* RECAP */
+.recap-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:15px}
+.recap-row:last-of-type{border-bottom:none}
+.recap-price{color:var(--muted);text-decoration:line-through;font-size:14px}
+.recap-total-box{background:var(--card);border-radius:12px;padding:16px;margin-top:16px;text-align:center}
+.total-label{font-size:13px;color:var(--muted);margin-bottom:6px}
+.total-was{font-size:22px;color:#ff9999;text-decoration:line-through;font-weight:700}
+.recap-bridge{margin-top:16px;font-size:15px;color:var(--muted);text-align:center}
+.recap-bridge strong{color:var(--yellow)}
+
+/* OFERTA */
+.offer-box{background:linear-gradient(145deg,#1a2433,#0f1923);border:2px solid var(--yellow);border-radius:20px;padding:32px 24px;text-align:center;box-shadow:0 0 50px rgba(245,200,66,0.15)}
+.offer-name{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--yellow);margin-bottom:16px}
+.price-main{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,72px);font-weight:900;color:#fff;line-height:1;margin-bottom:4px}
+.price-sub{color:var(--muted);font-size:15px}
+.price-or{font-size:13px;color:var(--muted);margin:10px 0}
+.price-installment{font-size:24px;font-weight:700;color:var(--yellow);margin-bottom:24px}
+.urgency-tag{display:inline-block;background:rgba(245,200,66,0.12);border:1px solid var(--border);color:var(--yellow);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px;margin-bottom:20px}
+.guarantee{display:flex;align-items:center;gap:10px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:12px;padding:14px;margin-top:20px;text-align:left}
+.guarantee-icon{font-size:28px;flex-shrink:0}
+.guarantee-text{font-size:14px;color:var(--green)}
+
+/* ACESSO */
+.access-step{display:flex;align-items:flex-start;gap:16px}
+.access-num{width:40px;height:40px;flex-shrink:0;background:var(--yellow);color:#000;font-weight:900;font-size:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif}
+.access-text{padding-top:8px;font-size:16px;color:var(--text)}
+
+/* ESCOLHA */
+.choice-bad{background:rgba(255,80,80,0.06);border:1px solid rgba(255,80,80,0.2);border-radius:var(--r);padding:20px}
+.choice-good{background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.25);border-radius:var(--r);padding:20px}
+.choice-badge{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;display:block}
+.choice-bad .choice-badge{color:#ff6b6b}
+.choice-good .choice-badge{color:var(--green)}
+.choice-title{font-size:16px;color:#fff;line-height:1.5}
+.choice-close{margin-top:24px;font-size:clamp(16px,2.5vw,20px);color:var(--text);font-style:italic;text-align:center;font-family:'Playfair Display',serif}
+
+/* AUTH */
+.auth-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px 20px}
+.auth-tag{display:inline-block;background:rgba(245,200,66,0.1);border:1px solid var(--border);color:var(--yellow);font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:16px}
+.auth-cred{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,0.06);font-size:15px;color:var(--text)}
+.auth-cred-icon{color:var(--yellow);font-size:16px;flex-shrink:0;margin-top:2px}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid rgba(255,255,255,0.06)}
+.faq-q{width:100%;background:none;border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;text-align:left;padding:18px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-arrow{flex-shrink:0;font-size:18px;transition:transform .25s;color:var(--yellow)}
+.faq-a{font-size:15px;color:var(--muted);padding-bottom:18px;display:none;line-height:1.7}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+
+/* FOOTER */
+footer{background:var(--bg3);padding:40px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.06)}
+footer .logo{font-size:22px;margin-bottom:12px}
+footer .contact{font-size:14px;color:var(--muted);margin-bottom:16px}
+footer .disclaimer{font-size:12px;color:rgba(255,255,255,0.3);line-height:1.6;max-width:540px;margin:0 auto}
+footer .copy{font-size:12px;color:rgba(255,255,255,0.25);margin-top:12px}
+
+/* STICKY */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(13,17,23,0.98) 0%,rgba(13,17,23,0) 100%);padding:16px 24px 20px;z-index:100;pointer-events:none;opacity:0;transition:opacity .3s}
+.sticky-cta.show{opacity:1;pointer-events:all}
+.sticky-cta .btn{max-width:480px;margin:0 auto;font-size:16px;padding:16px 24px}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner>*{animation:fadeUp .6s ease both}
+.hero-inner>*:nth-child(1){animation-delay:.1s}
+.hero-inner>*:nth-child(2){animation-delay:.3s}
+
+/* ════════ GRIDS (mobile first → desktop) ════════ */
+
+/* Identificação */
+.id-grid{display:grid;grid-template-columns:1fr;gap:12px}
+
+/* Prova */
+.proof-grid{display:grid;grid-template-columns:1fr;gap:16px}
+
+/* Pensamentos dor */
+.thoughts-grid{display:grid;grid-template-columns:1fr;gap:10px}
+
+/* Steps */
+.steps-grid{display:grid;grid-template-columns:1fr;gap:16px}
+
+/* Benefícios */
+.benefits-grid{display:grid;grid-template-columns:1fr}
+
+/* Stack */
+.stack-grid{display:grid;grid-template-columns:1fr;gap:14px}
+
+/* Recap + Oferta */
+.recap-offer{display:grid;grid-template-columns:1fr;gap:48px}
+
+/* Acesso */
+.access-grid{display:flex;flex-direction:column;gap:20px}
+
+/* Escolha */
+.choice-grid{display:grid;grid-template-columns:1fr;gap:16px}
+
+/* FAQ */
+.faq-cols{display:block}
+.faq-cols .faq-col{display:block}
+
+/* ════════ TABLET 640px ════════ */
+@media(min-width:640px){
+  .proof-grid{grid-template-columns:1fr 1fr}
+  .id-grid{grid-template-columns:1fr 1fr}
+  .thoughts-grid{grid-template-columns:1fr 1fr}
+  .stack-grid{grid-template-columns:1fr 1fr}
+  .choice-grid{grid-template-columns:1fr 1fr}
+}
+
+/* ════════ DESKTOP 860px ════════ */
+@media(min-width:860px){
+  body{font-size:18px}
+  section{padding:88px 0}
+
+  /* Hero: true 2-col, left text / right phone */
+  .hero{padding:72px 0}
+  .hero-inner{
+    flex-direction:row;
+    align-items:center;
+    gap:56px;
+    padding:0 48px;
+  }
+  .hero-text{
+    flex:1 1 0;
+    min-width:0;
+    text-align:left;
+  }
+  /* Cap title to column width — no more full-vw scaling */
+  .hero-text h1{
+    font-size:clamp(28px,2.8vw,42px);
+  }
+  .hero-text .btn-wrap{margin-left:0}
+  .hero-right{
+    flex:0 0 260px;
+    align-items:center;
+  }
+
+  .steps-grid{grid-template-columns:repeat(3,1fr)}
+  .benefits-grid{grid-template-columns:1fr 1fr;column-gap:32px}
+  .recap-offer{grid-template-columns:1fr 1fr;align-items:start}
+  .access-grid{flex-direction:row;justify-content:space-between}
+  .access-step{flex-direction:column;align-items:center;text-align:center;flex:1}
+
+  /* FAQ 2 cols */
+  .faq-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
+}
+
+@media(min-width:1100px){
+  .hero-inner{padding:0 64px}
+  .hero-text h1{font-size:38px}
+  section{padding:96px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="logo">🌙 Dormi<span class="w">stória</span></div>
+      <h1>Descubra como fazer seu filho <em>dormir mais rápido</em> todas as noites, usando histórias certas</h1>
+      <p class="hero-sub">mesmo que ele sempre enrole, peça "só mais um pouquinho" ou nunca queira ir pra cama.</p>
+      <p class="hero-sub2">Receba 1 história infantil por dia direto no seu WhatsApp, criada para prender a atenção da criança e conduzir naturalmente ao sono.</p>
+      <ul class="filter-list">
+        <li><span class="icon">😩</span>Para pais que sofrem toda noite pra fazer o filho dormir</li>
+        <li><span class="icon">🔁</span>Para quem já tentou de tudo e nada funciona direito</li>
+        <li><span class="icon">🌙</span>Para quem quer uma rotina mais tranquila no final do dia</li>
+      </ul>
+      <div class="btn-wrap"><a href="#oferta" class="btn">QUERO NOITES MAIS TRANQUILAS</a></div>
+    </div>
+    <div class="hero-right">
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-top"><div class="phone-dot"></div><div class="phone-dot"></div><div class="phone-dot"></div></div>
+          <div class="phone-screen">
+            <div class="wa-header">
+              <div class="wa-avatar">D</div>
+              <div><div class="wa-name">Dormistória ✨</div><div style="color:#b2dfdb;font-size:10px">online</div></div>
+            </div>
+            <div class="wa-bubble">
+              <strong>🌙 História de Hoje</strong>
+              "Era uma vez uma estrelinha que viajava pela noite para chegar na janela das crianças que precisavam de sono…"
+              <div class="wa-time">21:03 ✓✓</div>
+            </div>
+          </div>
+        </div>
+        <div class="star-badge">✨ No WhatsApp!</div>
+      </div>
+      <div class="sleeping-tag" style="margin-top:16px">😴 Seu filho vai adorar</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── IDENTIFICAÇÃO ── -->
+<section class="alt">
+  <div class="wrap">
+    <span class="sec-label">Para você que…</span>
+    <div class="sec-title">Dormistória é para você que...</div>
+    <div class="id-grid">
+      <div class="id-card"><div class="id-icon">😮‍💨</div><div class="id-text">Fica exausto tentando fazer seu filho dormir</div></div>
+      <div class="id-card"><div class="id-icon">⏰</div><div class="id-text">Escuta "só mais 5 minutinhos" todos os dias</div></div>
+      <div class="id-card"><div class="id-icon">🌙</div><div class="id-text">Quer criar uma rotina mais leve na hora de dormir</div></div>
+      <div class="id-card"><div class="id-icon">🐌</div><div class="id-text">Sente que seu filho demora demais pra pegar no sono</div></div>
+      <div class="id-card"><div class="id-icon">📺</div><div class="id-text">Já tentou TV, celular, brincadeiras… e nada resolve de verdade</div></div>
+    </div>
+    <div class="id-close">✅ Se você se identificou com 3 ou mais itens acima, <strong>Dormistória é para você.</strong></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── PROVA SOCIAL ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">Prova social</span>
+    <div class="sec-title">Veja o que outros pais estão dizendo</div>
+    <div class="proof-grid">
+      <div class="wa-proof">
+        <div class="wa-proof-header"><div class="proof-avatar">M</div><div class="proof-name">Mariana P. 💛</div></div>
+        <div class="wa-msg">"Comecei a ler e meu filho apagou antes do final da história" 😴<span class="checkmarks">✓✓</span></div>
+      </div>
+      <div class="wa-proof">
+        <div class="wa-proof-header"><div class="proof-avatar">R</div><div class="proof-name">Rafael S. 💛</div></div>
+        <div class="wa-msg">"Virou nosso ritual. Agora ele até pede a Dormistória" 🌙<span class="checkmarks">✓✓</span></div>
+      </div>
+      <div class="wa-proof">
+        <div class="wa-proof-header"><div class="proof-avatar">C</div><div class="proof-name">Camila L. 💛</div></div>
+        <div class="wa-msg">"Diminuíram MUITO as brigas na hora de ir pra cama" 🙌<span class="checkmarks">✓✓</span></div>
+      </div>
+      <div class="wa-proof">
+        <div class="wa-proof-header"><div class="proof-avatar">A</div><div class="proof-name">Ana R. 💛</div></div>
+        <div class="wa-msg">"Eu também relaxo junto lendo pra ele" 💆‍♀️<span class="checkmarks">✓✓</span></div>
+      </div>
+    </div>
+    <p class="proof-caption">Relatos de pais que usam leitura guiada para rotina noturna</p>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── DOR / RUMINAÇÃO ── -->
+<section class="dark">
+  <div class="wrap">
+    <span class="sec-label">Você já sentiu isso?</span>
+    <div class="sec-title">Eu sei… chega o fim do dia e você só quer descansar.</div>
+    <p class="pain-open">Mas aí começa a "luta" pra fazer seu filho dormir.<br><br>E toda noite parece a mesma coisa…</p>
+    <div class="thoughts-grid">
+      <div class="thought-bubble">"Por que ele nunca dorme na hora certa?"</div>
+      <div class="thought-bubble">"Eu já tentei tudo… o que falta?"</div>
+      <div class="thought-bubble">"Só queria ter um pouco de paz no final do dia"</div>
+      <div class="thought-bubble">"Será que estou fazendo algo errado?"</div>
+    </div>
+    <div class="diagnosis">No fim das contas, o problema <strong>não é seu filho "ser difícil"</strong>.<br><br>É que você ainda não tem um ritual que <strong>conduza ele naturalmente ao sono</strong>.</div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── TRANSIÇÃO ── -->
+<section class="alt">
+  <div class="wrap">
+    <span class="sec-label">Uma pergunta...</span>
+    <div class="transition-block">
+      <p>E se você pudesse fazer seu filho dormir mais rápido, sem brigas, sem estresse e sem depender de tela?</p>
+    </div>
+    <div class="warning-box">⚠️ Continuar do jeito que está só vai deixar suas noites cada vez mais cansativas.</div>
+    <p style="font-size:18px;color:var(--text);text-align:center;font-weight:600">É exatamente aqui que entra o <span style="color:var(--yellow)">Dormistória</span>.</p>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── MECANISMO ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">Como funciona</span>
+    <div class="sec-title">Os 3 passos para transformar a hora de dormir</div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">1</div><div class="step-title">📱 Abrir a história no WhatsApp</div><div class="step-desc">Sem complicação. Você recebe tudo pronto, direto no celular.</div></div>
+      <div class="step-card"><div class="step-num">2</div><div class="step-title">🗣️ Ler com ritmo e calma</div><div class="step-desc">As histórias são pensadas para desacelerar a mente da criança.</div></div>
+      <div class="step-card"><div class="step-num">3</div><div class="step-title">😴 Conduzir naturalmente ao sono</div><div class="step-desc">A narrativa vai reduzindo estímulos e ajudando o corpo a relaxar.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── BENEFÍCIOS ── -->
+<section class="alt">
+  <div class="wrap">
+    <span class="sec-label">O que você vai ganhar</span>
+    <div class="sec-title">Com Dormistória, você vai...</div>
+    <div class="benefits-grid">
+      <div class="benefit-item"><div class="check">✓</div>Reduzir o tempo que seu filho leva pra dormir</div>
+      <div class="benefit-item"><div class="check">✓</div>Criar uma rotina previsível e mais tranquila</div>
+      <div class="benefit-item"><div class="check">✓</div>Diminuir brigas na hora de ir pra cama</div>
+      <div class="benefit-item"><div class="check">✓</div>Ajudar seu filho a relaxar naturalmente</div>
+      <div class="benefit-item"><div class="check">✓</div>Ter mais tempo pra você no final do dia</div>
+      <div class="benefit-item"><div class="check">✓</div>Transformar um momento estressante em conexão</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── AUTORIDADE ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">Sobre o método</span>
+    <div class="sec-title">Método desenvolvido com base em práticas de rotina infantil e leitura guiada</div>
+    <div class="auth-card">
+      <div class="auth-tag">Nossa missão</div>
+      <p style="font-size:15px;color:var(--muted);margin-bottom:16px">Criar uma forma simples de ajudar pais a terem noites mais tranquilas com seus filhos</p>
+      <div class="auth-cred"><div class="auth-cred-icon">★</div>Histórias estruturadas para reduzir estímulos</div>
+      <div class="auth-cred"><div class="auth-cred-icon">★</div>Foco em relaxamento e desaceleração</div>
+      <div class="auth-cred"><div class="auth-cred-icon">★</div>Conteúdo pensado para rotina noturna</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── STACK ── -->
+<section class="alt">
+  <div class="wrap">
+    <span class="sec-label">O que você recebe</span>
+    <div class="sec-title">Tudo que está incluso na assinatura</div>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-icon">📖</div><div><div class="stack-title">1 história infantil por dia</div><div class="stack-desc">Direto no WhatsApp, pronta para ler</div></div></div>
+      <div class="stack-card"><div class="stack-icon">🌙</div><div><div class="stack-title">Estrutura calmante</div><div class="stack-desc">Pensadas para reduzir agitação e estimular o sono</div></div></div>
+      <div class="stack-card"><div class="stack-icon">✅</div><div><div class="stack-title">Rotina simples de aplicação</div><div class="stack-desc">Sem precisar aprender nada complicado</div></div></div>
+      <div class="stack-card"><div class="stack-icon">📅</div><div><div class="stack-title">Acesso contínuo por 1 ano</div><div class="stack-desc">Histórias novas todos os dias</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── RECAP + OFERTA ── -->
+<section id="oferta">
+  <div class="wrap">
+    <div class="recap-offer">
+      <div>
+        <span class="sec-label">Recapitulando</span>
+        <div class="sec-title">O valor real do que você leva</div>
+        <div class="recap-row"><span>365 histórias infantis</span><span class="recap-price">R$ 197</span></div>
+        <div class="recap-row"><span>Entrega diária no WhatsApp</span><span class="recap-price">R$ 17</span></div>
+        <div class="recap-row"><span>Estrutura pensada para sono</span><span class="recap-price">R$ 67</span></div>
+        <div class="recap-row"><span>Rotina pronta para aplicar</span><span class="recap-price">R$ 37</span></div>
+        <div class="recap-total-box">
+          <div class="total-label">Tudo isso deveria custar</div>
+          <div class="total-was">R$ 318</div>
+        </div>
+        <p class="recap-bridge">Mas hoje você pode ter acesso por <strong>uma condição especial</strong>.</p>
+      </div>
+      <div>
+        <span class="sec-label">Oferta especial</span>
+        <div class="offer-box">
+          <div class="offer-name">Assinatura Dormistória</div>
+          <div class="urgency-tag">⚡ Acesso imediato após confirmação</div>
+          <div class="price-main">R$97</div>
+          <div class="price-sub">à vista</div>
+          <div class="price-or">— ou —</div>
+          <div class="price-installment">12x de R$ 10,03</div>
+          <a href="https://pay.hotmart.com/P105890704Y" target="_blank" class="btn">QUERO NOITES MAIS TRANQUILAS</a>
+          <div class="guarantee">
+            <div class="guarantee-icon">🛡️</div>
+            <div class="guarantee-text"><strong>7 dias de garantia incondicional.</strong> Se não fizer sentido, pode cancelar sem burocracia.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── ACESSO ── -->
+<section class="alt">
+  <div class="wrap">
+    <span class="sec-label">Como acessar</span>
+    <div class="sec-title">Simples assim</div>
+    <div class="access-grid">
+      <div class="access-step"><div class="access-num">1</div><div class="access-text">Faça sua inscrição</div></div>
+      <div class="access-step"><div class="access-num">2</div><div class="access-text">Entre no grupo do WhatsApp</div></div>
+      <div class="access-step"><div class="access-num">3</div><div class="access-text">Comece a receber suas histórias para dormir todos os dias</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── ESCOLHA ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">A escolha é sua</span>
+    <div class="sec-title">Agora você tem duas opções:</div>
+    <div class="choice-grid">
+      <div class="choice-bad"><span class="choice-badge">❌ Opção 1</span><div class="choice-title">Continuar passando noites cansativas tentando fazer seu filho dormir</div></div>
+      <div class="choice-good"><span class="choice-badge">✅ Opção 2</span><div class="choice-title">Criar uma rotina simples onde ele relaxa e dorme com mais facilidade</div></div>
+    </div>
+    <div class="choice-close">A escolha é simples… e o impacto é diário.</div>
+  </div>
+</section>
+
+<!-- ── CTA FINAL ── -->
+<section id="cta-final" class="alt" style="text-align:center">
+  <div class="wrap">
+    <div style="font-size:clamp(20px,3vw,28px);font-weight:700;color:var(--yellow);margin-bottom:8px;font-family:'Playfair Display',serif">12x de R$ 10,03</div>
+    <div style="font-size:15px;color:var(--muted);margin-bottom:28px">ou R$ 97 à vista</div>
+    <div class="btn-wrap" style="margin:0 auto"><a href="#oferta" class="btn">👉 QUERO NOITES MAIS TRANQUILAS</a></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-star">★</div><div class="divider-line"></div></div>
+
+<!-- ── FAQ ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">Dúvidas</span>
+    <div class="sec-title">Perguntas frequentes</div>
+    <div class="faq-cols">
+      <div class="faq-col">
+        <div class="faq-item">
+          <button class="faq-q">Funciona para qualquer idade? <span class="faq-arrow">▾</span></button>
+          <div class="faq-a">Funciona melhor para crianças pequenas em fase de rotina de sono.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Preciso saber contar histórias? <span class="faq-arrow">▾</span></button>
+          <div class="faq-a">Não. As histórias já vêm prontas para leitura simples. Você só precisa ler com calma.</div>
+        </div>
+      </div>
+      <div class="faq-col">
+        <div class="faq-item">
+          <button class="faq-q">E se meu filho não dormir? <span class="faq-arrow">▾</span></button>
+          <div class="faq-a">Você tem 7 dias para testar. Se não fizer sentido, pode cancelar sem burocracia.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Como recebo as histórias? <span class="faq-arrow">▾</span></button>
+          <div class="faq-a">Direto no WhatsApp, uma por dia, sempre prontas para usar na hora de dormir.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RODAPÉ ── -->
+<footer>
+  <div class="logo">🌙 Dormi<span class="w">stória</span></div>
+  <div class="contact">contato@dormistoria.com.br</div>
+  <div class="disclaimer">Resultados podem variar de acordo com cada criança e rotina familiar.</div>
+  <div class="copy">© Dormistória. Todos os direitos reservados.</div>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <div style="max-width:480px;margin:0 auto"><a href="#oferta" class="btn">QUERO NOITES MAIS TRANQUILAS ✨</a></div>
+</div>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Sticky CTA
+  const stickyCta = document.getElementById('stickyCta');
+  const hero = document.querySelector('.hero');
+  const finalCta = document.getElementById('cta-final');
+  window.addEventListener('scroll', () => {
+    const heroGone = hero.getBoundingClientRect().bottom < 0;
+    const finalVisible = finalCta.getBoundingClientRect().top < window.innerHeight;
+    stickyCta.classList.toggle('show', heroGone && !finalVisible);
+  }, {passive: true});
+</script>
+</body>
+</html>
