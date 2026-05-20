@@ -1,0 +1,1219 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta property="og:title"       content="A Gotinha Gota — Dormistória"/>
+<meta property="og:description" content="Uma pequena gota descobre o mundo numa aventura encantadora 🌧️"/>
+<meta property="og:image"       content="capa.png"/>
+<meta property="og:type"        content="website"/>
+<meta name="twitter:card"       content="summary_large_image"/>
+<meta name="twitter:image"      content="capa.png"/>
+<link rel="icon"            type="image/png" href="../../../../favicon.png"/>
+<link rel="apple-touch-icon"               href="../../../../favicon.png"/>
+<title>A Gotinha Gota — Dormistória</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  :root{
+    --text-dark:#1A3A4A;
+    --text-mid:#2A5A6A;
+    --white:#FFFFFF;
+  }
+  html,body{
+    width:100%;height:100%;
+    overflow:hidden;
+    background:#0A2A3A;
+    font-family:'Nunito',sans-serif;
+  }
+  #app{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  #book{
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    border-radius:0;
+    box-shadow:none;
+  }
+  @media(min-width:500px){
+    #book{max-width:430px;max-height:932px;border-radius:24px;box-shadow:0 0 60px rgba(0,0,0,0.5);}
+  }
+  .page{
+    position:absolute;inset:0;width:100%;height:100%;
+    display:flex;flex-direction:column;
+    opacity:0;pointer-events:none;overflow:hidden;
+    transform:translateX(0);visibility:hidden;
+  }
+  .page.active{opacity:1;pointer-events:all;transform:translateX(0);visibility:visible;}
+  .illustration{flex-shrink:0;width:100%;position:relative;overflow:hidden}
+  .illustration svg{width:100%;height:100%;display:block}
+  .text-box{
+    padding:20px 24px 24px;flex:1;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .text-box p{
+    font-family:'Nunito',sans-serif;
+    font-size:clamp(19px,5vw,24px);
+    line-height:1.75;color:var(--text-dark);font-weight:700;
+  }
+  .text-box p+p{margin-top:12px}
+  .text-box p em{font-style:italic;color:#1A6A8A}
+  .text-overlay{position:absolute;bottom:0;left:0;right:0;padding:16px 20px 28px;}
+  .text-overlay p{
+    font-family:'Nunito',sans-serif;
+    font-size:clamp(18px,4.8vw,23px);
+    line-height:1.75;font-weight:700;text-align:center;
+  }
+  .bubble{background:rgba(255,255,255,0.92);border-radius:20px;padding:16px 20px;backdrop-filter:blur(6px);}
+  .bubble p{font-size:clamp(18px,4.8vw,23px)!important;line-height:1.75!important;color:var(--text-dark);font-weight:700;}
+  .bubble-dark{background:rgba(10,40,60,0.80);border-radius:20px;padding:16px 20px;}
+  .bubble-dark p{color:#E0F4FF;font-weight:700;font-size:clamp(18px,4.8vw,23px)!important;line-height:1.75!important;}
+  .cover-content{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:30px 24px;text-align:center;
+  }
+  #dots{
+    position:fixed;bottom:14px;left:50%;transform:translateX(-50%);
+    display:flex;gap:5px;z-index:100;opacity:0.5;pointer-events:none;
+  }
+  .dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.4);transition:background 0.3s,transform 0.3s}
+  .dot.active{background:rgba(255,255,255,0.9);transform:scale(1.3)}
+  .tap-prev,.tap-next{
+    position:fixed;top:50%;transform:translateY(-50%);
+    width:48px;height:64px;z-index:50;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .tap-prev{left:8px}.tap-next{right:8px}
+  .tap-arrow{
+    width:44px;height:44px;background:rgba(255,255,255,0.55);
+    border:2px solid rgba(255,255,255,0.8);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    transition:background 0.15s,transform 0.1s;
+    box-shadow:0 2px 10px rgba(0,0,0,0.25);
+  }
+  .tap-prev:active .tap-arrow,.tap-next:active .tap-arrow{background:rgba(255,255,255,0.85);transform:scale(0.92)}
+  .tap-arrow svg{width:22px;height:22px;stroke:#0A2A3A;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<div id="app"><div id="book">
+
+<!-- CAPA -->
+<div class="page active" id="page-0">
+<svg viewBox="0 0 430 932" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
+  <defs>
+    <radialGradient id="bgC" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#0A4A6A"/>
+      <stop offset="60%" stop-color="#042030"/>
+      <stop offset="100%" stop-color="#010A14"/>
+    </radialGradient>
+    <radialGradient id="glowC" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#60C8F0" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#60C8F0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="430" height="932" fill="url(#bgC)"/>
+  <!-- stars -->
+  <circle cx="40" cy="50" r="1.5" fill="#C0E8FF" opacity="0.8"/>
+  <circle cx="120" cy="30" r="1" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="200" cy="20" r="2" fill="#C0E8FF" opacity="0.9"/>
+  <circle cx="310" cy="45" r="1.5" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="390" cy="25" r="1" fill="#C0E8FF" opacity="0.8"/>
+  <circle cx="60" cy="120" r="1.2" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="350" cy="100" r="1.5" fill="#C0E8FF" opacity="0.7"/>
+  <circle cx="420" cy="80" r="1" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="25" cy="200" r="1" fill="#C0E8FF" opacity="0.5"/>
+  <circle cx="405" cy="180" r="1.5" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="170" cy="80" r="1" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="280" cy="60" r="1.2" fill="#C0E8FF" opacity="0.7"/>
+  <!-- rain cloud big -->
+  <ellipse cx="215" cy="220" rx="155" ry="100" fill="#5090B0" opacity="0.9"/>
+  <ellipse cx="110" cy="255" rx="95" ry="72" fill="#4A88A8" opacity="0.9"/>
+  <ellipse cx="330" cy="245" rx="100" ry="75" fill="#4A88A8" opacity="0.9"/>
+  <ellipse cx="215" cy="200" rx="110" ry="65" fill="#6AAAC8"/>
+  <ellipse cx="150" cy="220" rx="70" ry="52" fill="#6AAAC8"/>
+  <ellipse cx="285" cy="215" rx="75" ry="54" fill="#6AAAC8"/>
+  <!-- rain drops falling from cloud -->
+  <ellipse cx="140" cy="320" rx="6" ry="12" fill="#90D4F0" opacity="0.8"/>
+  <ellipse cx="175" cy="345" rx="6" ry="12" fill="#80CCE8" opacity="0.7"/>
+  <ellipse cx="215" cy="325" rx="6" ry="12" fill="#90D4F0" opacity="0.85"/>
+  <ellipse cx="255" cy="350" rx="6" ry="12" fill="#80CCE8" opacity="0.7"/>
+  <ellipse cx="290" cy="330" rx="6" ry="12" fill="#90D4F0" opacity="0.8"/>
+  <!-- GOTA — main character, big cute water drop -->
+  <!-- drop body -->
+  <path d="M215,380 Q185,420 185,455 Q185,490 215,500 Q245,490 245,455 Q245,420 215,380Z" fill="#60C0E8"/>
+  <path d="M215,382 Q190,420 190,455 Q190,486 215,496 Q240,486 240,455 Q240,420 215,382Z" fill="#80D4F4"/>
+  <!-- shine on drop -->
+  <ellipse cx="204" cy="420" rx="8" ry="14" fill="#FFFFFF" opacity="0.4" transform="rotate(-20 204 420)"/>
+  <!-- face on drop -->
+  <ellipse cx="207" cy="453" rx="5" ry="5.5" fill="#1A5A7A"/>
+  <ellipse cx="223" cy="453" rx="5" ry="5.5" fill="#1A5A7A"/>
+  <circle cx="209" cy="451" r="2" fill="#fff"/>
+  <circle cx="225" cy="451" r="2" fill="#fff"/>
+  <!-- big cute smile -->
+  <path d="M207 463 Q215 472 223 463" stroke="#1A5A7A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- cheeks -->
+  <circle cx="200" cy="461" r="7" fill="#FFB0C0" opacity="0.5"/>
+  <circle cx="230" cy="461" r="7" fill="#FFB0C0" opacity="0.5"/>
+  <!-- tiny arms -->
+  <ellipse cx="178" cy="450" rx="16" ry="8" fill="#60C0E8" transform="rotate(-25 178 450)"/>
+  <ellipse cx="252" cy="446" rx="16" ry="8" fill="#60C0E8" transform="rotate(25 252 446)"/>
+  <!-- sparkle around gota -->
+  <circle cx="162" cy="415" r="4" fill="#C0EEFF" opacity="0.7"/>
+  <circle cx="268" cy="410" r="3.5" fill="#C0EEFF" opacity="0.6"/>
+  <circle cx="160" cy="480" r="3" fill="#C0EEFF" opacity="0.6"/>
+  <circle cx="270" cy="475" r="3.5" fill="#C0EEFF" opacity="0.6"/>
+  <!-- water ripple bottom -->
+  <ellipse cx="215" cy="790" rx="180" ry="35" fill="#1A6A8A" opacity="0.5"/>
+  <ellipse cx="215" cy="790" rx="130" ry="22" fill="#1A6A8A" opacity="0.4"/>
+  <ellipse cx="215" cy="790" rx="80" ry="12" fill="#2A8AAA" opacity="0.5"/>
+  <!-- title area bg -->
+  <rect x="30" y="530" width="370" height="160" rx="22" fill="rgba(0,60,100,0.3)"/>
+</svg>
+<div class="cover-content">
+  <div style="height:515px"></div>
+  <h1 style="font-family:'Fredoka One',cursive;font-size:clamp(36px,9.5vw,50px);color:#C0EEFF;text-shadow:0 3px 16px rgba(0,80,120,0.8);line-height:1.2;">A Gotinha<br>Gota</h1>
+  <p style="font-family:'Nunito',sans-serif;font-size:clamp(14px,3.8vw,18px);color:#80C8E8;margin-top:10px;font-weight:700;">Uma aventura pelo mundo das águas</p>
+  <img src="data:image/png;base64,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" alt="Dormistória" style="width:80px;height:80px;margin-top:16px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.6));"/>
+  <a href="https://dormistoria.com.br" target="_blank" style="font-family:'Nunito',sans-serif;font-size:clamp(12px,3.2vw,15px);font-weight:800;color:#C0EEFF;margin-top:8px;text-decoration:none;letter-spacing:0.04em;text-shadow:0 2px 8px rgba(0,0,0,0.8);">dormistoria.com.br</a>
+  <p style="font-family:'Nunito',sans-serif;font-size:clamp(9px,2.5vw,12px);font-weight:600;color:rgba(255,255,255,0.35);margin-top:6px;">© Dormistória. Todos os direitos reservados.</p>
+</div>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page" id="page-1" style="background:#D0EEF8">
+<div class="illustration" style="height:57%">
+<svg viewBox="0 0 430 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="520" fill="#A8D8EE"/>
+  <rect x="0" y="340" width="430" height="180" fill="#C8E8F4"/>
+  <ellipse cx="215" cy="0" rx="280" ry="160" fill="#C8E8FF" opacity="0.4"/>
+  <!-- big rain cloud -->
+  <ellipse cx="215" cy="180" rx="150" ry="90" fill="#7AAABF"/>
+  <ellipse cx="110" cy="210" rx="90" ry="65" fill="#6A9AB0"/>
+  <ellipse cx="325" cy="205" rx="95" ry="68" fill="#6A9AB0"/>
+  <ellipse cx="215" cy="162" rx="105" ry="60" fill="#8ABBD0"/>
+  <!-- inside cloud cozy little house for Gota -->
+  <ellipse cx="215" cy="175" rx="50" ry="38" fill="#5090A8"/>
+  <!-- tiny door on cloud -->
+  <rect x="205" y="170" width="20" height="24" rx="4" fill="#3A7090"/>
+  <!-- rain drops falling gently -->
+  <ellipse cx="140" cy="285" rx="5" ry="10" fill="#60B8E0" opacity="0.7"/>
+  <ellipse cx="175" cy="305" rx="5" ry="10" fill="#50A8D0" opacity="0.6"/>
+  <ellipse cx="215" cy="275" rx="5" ry="10" fill="#60B8E0" opacity="0.8"/>
+  <ellipse cx="255" cy="300" rx="5" ry="10" fill="#50A8D0" opacity="0.65"/>
+  <ellipse cx="290" cy="285" rx="5" ry="10" fill="#60B8E0" opacity="0.7"/>
+  <!-- GOTA sleeping in cloud cozy -->
+  <!-- gota peeking out -->
+  <path d="M215,148 Q200,165 200,178 Q200,194 215,198 Q230,194 230,178 Q230,165 215,148Z" fill="#60C0E8"/>
+  <path d="M215,150 Q203,165 203,178 Q203,191 215,195 Q227,191 227,178 Q227,165 215,150Z" fill="#80D4F4"/>
+  <ellipse cx="209" cy="175" rx="4" ry="4.5" fill="#1A5A7A"/>
+  <ellipse cx="221" cy="175" rx="4" ry="4.5" fill="#1A5A7A"/>
+  <!-- sleeping eyes -->
+  <path d="M206 175 Q209 172 212 175" stroke="#1A5A7A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M218 175 Q221 172 224 175" stroke="#1A5A7A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- small smile -->
+  <path d="M210 182 Q215 187 220 182" stroke="#1A5A7A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <circle cx="205" cy="180" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <circle cx="225" cy="180" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <!-- tiny arms -->
+  <ellipse cx="195" cy="183" rx="12" ry="6" fill="#60C0E8" transform="rotate(-20 195 183)"/>
+  <ellipse cx="235" cy="181" rx="12" ry="6" fill="#60C0E8" transform="rotate(20 235 181)"/>
+  <!-- ground puddles -->
+  <ellipse cx="130" cy="400" rx="40" ry="12" fill="#80C8E0" opacity="0.6"/>
+  <ellipse cx="300" cy="410" rx="35" ry="10" fill="#80C8E0" opacity="0.5"/>
+  <ellipse cx="215" cy="420" rx="50" ry="14" fill="#80C8E0" opacity="0.6"/>
+</svg>
+</div>
+<div class="text-box" style="background:#D0EEF8">
+  <p>Bem no meio de uma nuvem macia e cinzenta, dormia a Gotinha Gota.</p>
+  <p>Ela era pequenininha, azul e brilhante como um pedaço de céu.</p>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page-2" style="background:#E8F6FC">
+<div class="illustration" style="height:55%">
+<svg viewBox="0 0 430 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="500" fill="#C0E0F0"/>
+  <!-- morning light through cloud -->
+  <ellipse cx="215" cy="0" rx="250" ry="150" fill="#FFE8A0" opacity="0.25"/>
+  <!-- cloud friends waving goodbye -->
+  <ellipse cx="120" cy="120" rx="80" ry="50" fill="#90BACF"/>
+  <ellipse cx="70" cy="140" rx="55" ry="38" fill="#80AABE"/>
+  <ellipse cx="175" cy="135" rx="60" ry="42" fill="#80AABE"/>
+  <!-- cloud face friend 1 -->
+  <ellipse cx="110" cy="120" rx="4" ry="4.5" fill="#2A6080"/>
+  <ellipse cx="130" cy="120" rx="4" ry="4.5" fill="#2A6080"/>
+  <path d="M108 130 Q120 138 132 130" stroke="#2A6080" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- cloud 2 right -->
+  <ellipse cx="320" cy="110" rx="80" ry="50" fill="#90BACF"/>
+  <ellipse cx="275" cy="130" rx="55" ry="38" fill="#80AABE"/>
+  <ellipse cx="368" cy="128" rx="60" ry="42" fill="#80AABE"/>
+  <ellipse cx="310" cy="110" rx="4" ry="4.5" fill="#2A6080"/>
+  <ellipse cx="330" cy="110" rx="4" ry="4.5" fill="#2A6080"/>
+  <path d="M308 120 Q320 128 332 120" stroke="#2A6080" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Gota falling, arms wide, surprised/excited -->
+  <path d="M215,220 Q192,255 192,280 Q192,310 215,318 Q238,310 238,280 Q238,255 215,220Z" fill="#50B8E0"/>
+  <path d="M215,222 Q196,255 196,280 Q196,308 215,315 Q234,308 234,280 Q234,255 215,222Z" fill="#78CFF0"/>
+  <ellipse cx="205" cy="275" rx="5.5" ry="6" fill="#1A5A7A"/>
+  <ellipse cx="225" cy="275" rx="5.5" ry="6" fill="#1A5A7A"/>
+  <circle cx="207.5" cy="273" r="2" fill="#fff"/>
+  <circle cx="227.5" cy="273" r="2" fill="#fff"/>
+  <!-- O mouth surprised, falling -->
+  <ellipse cx="215" cy="287" rx="5" ry="6" fill="#1A5A7A"/>
+  <circle cx="203" cy="281" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <circle cx="227" cy="281" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <!-- arms flying out -->
+  <ellipse cx="186" cy="272" rx="18" ry="7" fill="#50B8E0" transform="rotate(-40 186 272)"/>
+  <ellipse cx="244" cy="268" rx="18" ry="7" fill="#50B8E0" transform="rotate(40 244 268)"/>
+  <!-- shine on gota -->
+  <ellipse cx="205" cy="245" rx="7" ry="12" fill="#fff" opacity="0.35" transform="rotate(-15 205 245)"/>
+  <!-- wind speed lines -->
+  <line x1="158" y1="250" x2="175" y2="243" stroke="#A0D8F0" stroke-width="1.5" opacity="0.6"/>
+  <line x1="152" y1="265" x2="172" y2="258" stroke="#A0D8F0" stroke-width="1.5" opacity="0.5"/>
+  <line x1="262" y1="245" x2="278" y2="238" stroke="#A0D8F0" stroke-width="1.5" opacity="0.6"/>
+  <!-- ground wet -->
+  <rect x="0" y="390" width="430" height="110" fill="#90C8DE"/>
+  <ellipse cx="215" cy="392" rx="200" ry="25" fill="#70B0CC"/>
+</svg>
+</div>
+<div class="text-box" style="background:#E8F6FC">
+  <p>Numa manhã de ventinho, Gota escorregou da nuvem sem querer.</p>
+  <p>— <em>"Aaaah!"</em> — ela gritou, caindo pelo céu aberto.</p>
+</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page-3">
+<svg viewBox="0 0 430 932" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
+  <rect width="430" height="932" fill="#B0D8EE"/>
+  <!-- sky gradient -->
+  <rect x="0" y="0" width="430" height="500" fill="#90C8E0"/>
+  <rect x="0" y="500" width="430" height="432" fill="#C8E8A0"/>
+  <!-- trees on ground -->
+  <rect x="30" y="480" width="14" height="160" fill="#5A7820"/>
+  <ellipse cx="37" cy="465" rx="40" ry="50" fill="#4A9030"/>
+  <rect x="100" y="475" width="14" height="165" fill="#5A7820"/>
+  <ellipse cx="107" cy="460" rx="44" ry="52" fill="#3A8828"/>
+  <rect x="300" y="470" width="14" height="170" fill="#5A7820"/>
+  <ellipse cx="307" cy="455" rx="42" ry="50" fill="#4A9030"/>
+  <rect x="380" y="478" width="14" height="162" fill="#5A7820"/>
+  <ellipse cx="387" cy="463" rx="38" ry="48" fill="#3A8828"/>
+  <!-- flowers on ground -->
+  <circle cx="160" cy="510" r="7" fill="#FF8090"/>
+  <rect x="156" y="510" width="8" height="20" fill="#5A9020"/>
+  <circle cx="220" cy="505" r="6" fill="#FFD060"/>
+  <rect x="216" y="505" width="8" height="18" fill="#5A9020"/>
+  <circle cx="260" cy="512" r="7" fill="#FF90C0"/>
+  <rect x="256" y="512" width="8" height="20" fill="#5A9020"/>
+  <!-- GOTA falling, getting closer to ground, looking around with wide curious eyes -->
+  <path d="M215,310 Q192,345 192,370 Q192,398 215,406 Q238,398 238,370 Q238,345 215,310Z" fill="#50B8E0"/>
+  <path d="M215,312 Q196,345 196,370 Q196,396 215,403 Q234,396 234,370 Q234,345 215,312Z" fill="#78CFF0"/>
+  <!-- curious wide eyes looking around -->
+  <ellipse cx="206" cy="366" rx="6" ry="6.5" fill="#1A5A7A"/>
+  <ellipse cx="224" cy="366" rx="6" ry="6.5" fill="#1A5A7A"/>
+  <circle cx="208.5" cy="363.5" r="2.5" fill="#fff"/>
+  <circle cx="226.5" cy="363.5" r="2.5" fill="#fff"/>
+  <!-- curious half-smile -->
+  <path d="M208 378 Q215 385 222 378" stroke="#1A5A7A" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <circle cx="200" cy="374" r="5.5" fill="#FFB0C0" opacity="0.5"/>
+  <circle cx="230" cy="374" r="5.5" fill="#FFB0C0" opacity="0.5"/>
+  <ellipse cx="188" cy="364" rx="17" ry="7" fill="#50B8E0" transform="rotate(-30 188 364)"/>
+  <ellipse cx="242" cy="360" rx="17" ry="7" fill="#50B8E0" transform="rotate(30 242 360)"/>
+  <!-- shine -->
+  <ellipse cx="205" cy="335" rx="7" ry="12" fill="#fff" opacity="0.3" transform="rotate(-15 205 335)"/>
+</svg>
+<div class="text-overlay">
+  <div class="bubble">
+    <p>Caindo, Gota abriu bem os olhinhos e viu o mundo lá embaixo pela primeira vez.</p>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page-4" style="background:#E0F5E0">
+<div class="illustration" style="height:57%">
+<svg viewBox="0 0 430 528" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="528" fill="#B8E0A0"/>
+  <rect x="0" y="0" width="430" height="260" fill="#88C8E0"/>
+  <!-- green meadow landing -->
+  <rect x="0" y="260" width="430" height="268" fill="#90C870"/>
+  <!-- many flowers -->
+  <circle cx="50" cy="262" r="8" fill="#FF8090"/>
+  <circle cx="85" cy="258" r="7" fill="#FFD060"/>
+  <circle cx="120" cy="265" r="9" fill="#FF90C0"/>
+  <circle cx="160" cy="260" r="7" fill="#FFAA60"/>
+  <circle cx="200" cy="263" r="8" fill="#FF8090"/>
+  <circle cx="240" cy="257" r="7" fill="#A0D060"/>
+  <circle cx="280" cy="264" r="9" fill="#FFD060"/>
+  <circle cx="320" cy="260" r="7" fill="#FF90C0"/>
+  <circle cx="360" cy="263" r="8" fill="#FFAA60"/>
+  <circle cx="400" cy="258" r="7" fill="#FF8090"/>
+  <!-- second row -->
+  <circle cx="35" cy="295" r="6" fill="#FFD060"/>
+  <circle cx="100" cy="292" r="7" fill="#FF8090"/>
+  <circle cx="170" cy="296" r="6" fill="#A0D060"/>
+  <circle cx="250" cy="290" r="7" fill="#FFD060"/>
+  <circle cx="330" cy="294" r="6" fill="#FF90C0"/>
+  <circle cx="400" cy="292" r="7" fill="#FFAA60"/>
+  <!-- GOTA landed on a flower, bouncing happy -->
+  <!-- big sunflower she landed on -->
+  <rect x="205" y="280" width="20" height="100" fill="#6A9020" rx="5"/>
+  <circle cx="215" cy="238" rx="65" ry="65" r="65" fill="#FFD820" opacity="0.5"/>
+  <circle cx="215" cy="238" r="50" fill="#E8A820"/>
+  <circle cx="215" cy="238" r="30" fill="#7A4010"/>
+  <!-- dots on center -->
+  <circle cx="208" cy="232" r="3" fill="#5A3008"/>
+  <circle cx="222" cy="232" r="3" fill="#5A3008"/>
+  <circle cx="215" cy="244" r="3" fill="#5A3008"/>
+  <!-- Gota sitting on center of flower very small but happy -->
+  <path d="M215,205 Q205,218 205,226 Q205,236 215,239 Q225,236 225,226 Q225,218 215,205Z" fill="#50B8E0"/>
+  <path d="M215,207 Q208,218 208,226 Q208,234 215,237 Q222,234 222,226 Q222,218 215,207Z" fill="#78CFF0"/>
+  <ellipse cx="211" cy="223" rx="3.5" ry="4" fill="#1A5A7A"/>
+  <ellipse cx="219" cy="223" rx="3.5" ry="4" fill="#1A5A7A"/>
+  <circle cx="212.5" cy="221.5" r="1.5" fill="#fff"/>
+  <circle cx="220.5" cy="221.5" r="1.5" fill="#fff"/>
+  <path d="M211 230 Q215 235 219 230" stroke="#1A5A7A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <circle cx="208" cy="228" r="4" fill="#FFB0C0" opacity="0.5"/>
+  <circle cx="222" cy="228" r="4" fill="#FFB0C0" opacity="0.5"/>
+  <!-- bounce lines -->
+  <line x1="200" y1="198" x2="194" y2="188" stroke="#90D8F0" stroke-width="2" opacity="0.7"/>
+  <line x1="215" y1="196" x2="215" y2="185" stroke="#90D8F0" stroke-width="2" opacity="0.7"/>
+  <line x1="230" y1="198" x2="236" y2="188" stroke="#90D8F0" stroke-width="2" opacity="0.7"/>
+  <!-- butterfly near -->
+  <ellipse cx="290" cy="200" rx="18" ry="10" fill="#FFB0E0" opacity="0.8" transform="rotate(-20 290 200)"/>
+  <ellipse cx="308" cy="200" rx="18" ry="10" fill="#FFB0E0" opacity="0.8" transform="rotate(20 308 200)"/>
+  <circle cx="299" cy="200" r="4" fill="#FF70A0"/>
+</svg>
+</div>
+<div class="text-box" style="background:#E0F5E0">
+  <p>Pum! Gota pousou bem no meio de um girassol amarelão.</p>
+  <p>— <em>"Que lugar bonito!"</em> — ela disse, olhando para todos os lados.</p>
+</div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page-5" style="background:#FFF8E8">
+<div class="illustration" style="height:56%">
+<svg viewBox="0 0 430 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="520" fill="#F0E8C0"/>
+  <rect x="0" y="300" width="430" height="220" fill="#A8C870"/>
+  <!-- soil under ground -->
+  <rect x="0" y="360" width="430" height="160" fill="#8A6030"/>
+  <!-- roots and worms underground hint -->
+  <path d="M100,380 Q130,400 120,420 Q110,440 140,450" stroke="#6A4020" stroke-width="4" fill="none" opacity="0.5"/>
+  <path d="M300,375 Q270,395 280,415 Q290,435 260,445" stroke="#6A4020" stroke-width="4" fill="none" opacity="0.5"/>
+  <!-- earthworm peeking -->
+  <ellipse cx="180" cy="370" rx="25" ry="10" fill="#D08060"/>
+  <circle cx="200" cy="368" r="8" fill="#C07050"/>
+  <ellipse cx="203" cy="366" rx="2" ry="2.5" fill="#2A1010"/>
+  <ellipse cx="207" cy="366" rx="2" ry="2.5" fill="#2A1010"/>
+  <path d="M203 371 Q205 374 207 371" stroke="#2A1010" stroke-width="1.2" fill="none"/>
+  <!-- grass line -->
+  <rect x="0" y="300" width="430" height="65" fill="#90B850"/>
+  <!-- Gota talking to flower, small on stem -->
+  <!-- flower stem and head -->
+  <rect x="205" y="130" width="20" height="175" fill="#6A9020" rx="5"/>
+  <circle cx="215" cy="118" r="52" fill="#FFD820" opacity="0.5"/>
+  <circle cx="215" cy="118" r="40" fill="#E8A820"/>
+  <circle cx="215" cy="118" r="24" fill="#7A4010"/>
+  <!-- flower face smiling -->
+  <ellipse cx="207" cy="114" rx="4" ry="4.5" fill="#5A3010"/>
+  <ellipse cx="223" cy="114" rx="4" ry="4.5" fill="#5A3010"/>
+  <path d="M207 123 Q215 130 223 123" stroke="#5A3010" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Gota on stem chatting, tiny -->
+  <path d="M215,158 Q208,168 208,175 Q208,183 215,185 Q222,183 222,175 Q222,168 215,158Z" fill="#50B8E0"/>
+  <path d="M215,160 Q210,168 210,175 Q210,182 215,184 Q220,182 220,175 Q220,168 215,160Z" fill="#78CFF0"/>
+  <ellipse cx="211.5" cy="173" rx="3" ry="3.5" fill="#1A5A7A"/>
+  <ellipse cx="218.5" cy="173" rx="3" ry="3.5" fill="#1A5A7A"/>
+  <path d="M211 179 Q215 183 219 179" stroke="#1A5A7A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- speech bubble from Gota -->
+  <rect x="128" y="140" width="72" height="34" rx="10" fill="#FFFFFF" opacity="0.9"/>
+  <polygon points="190,174 198,158 202,174" fill="#FFFFFF" opacity="0.9"/>
+  <text x="164" y="155" text-anchor="middle" font-size="10" fill="#1A5A7A" font-family="Nunito,sans-serif" font-weight="700">Oi! Eu sou</text>
+  <text x="164" y="167" text-anchor="middle" font-size="10" fill="#1A5A7A" font-family="Nunito,sans-serif" font-weight="700">a Gota! 💧</text>
+  <!-- bee flying nearby -->
+  <ellipse cx="330" cy="160" rx="20" ry="14" fill="#FFD020"/>
+  <rect x="313" y="155" width="34" height="7" rx="3.5" fill="#2A2A2A" opacity="0.6"/>
+  <circle cx="330" cy="148" r="15" fill="#FFD020"/>
+  <ellipse cx="312" cy="152" rx="22" ry="12" fill="#C8F0FF" opacity="0.7" transform="rotate(-15 312 152)"/>
+  <ellipse cx="348" cy="152" rx="22" ry="12" fill="#C8F0FF" opacity="0.7" transform="rotate(15 348 152)"/>
+  <ellipse cx="323" cy="148" rx="3.5" ry="4" fill="#2A2A2A"/>
+  <ellipse cx="337" cy="148" rx="3.5" ry="4" fill="#2A2A2A"/>
+  <path d="M323 157 Q330 163 337 157" stroke="#4A2A10" stroke-width="1.8" fill="none"/>
+</svg>
+</div>
+<div class="text-box" style="background:#FFF8E8">
+  <p>O girassol sorriu para ela com um sorriso enorme.</p>
+  <p>— <em>"Bem-vinda ao jardim, Gotinha!"</em> — disse ele.</p>
+</div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="page-6" style="background:#C8EEF8">
+<div class="illustration" style="height:65%">
+<svg viewBox="0 0 430 620" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="620" fill="#C8EEF8"/>
+  <!-- sky -->
+  <rect x="0" y="0" width="430" height="350" fill="#A0D0E8"/>
+  <!-- ground -->
+  <rect x="0" y="350" width="430" height="270" fill="#90B850"/>
+  <!-- trees -->
+  <rect x="30" y="200" width="16" height="240" fill="#5A7020"/>
+  <ellipse cx="38" cy="178" rx="52" ry="60" fill="#4A9030"/>
+  <rect x="380" y="210" width="16" height="230" fill="#5A7020"/>
+  <ellipse cx="388" cy="188" rx="50" ry="58" fill="#3A8828"/>
+  <!-- river through garden -->
+  <path d="M0,480 Q80,460 160,475 Q240,488 320,468 Q380,456 430,465" stroke="#60B8E0" stroke-width="55" fill="none" stroke-linecap="round"/>
+  <path d="M40,470 Q100,465 160,475" stroke="#90D4F0" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M220,472 Q280,465 340,470" stroke="#90D4F0" stroke-width="2" fill="none" opacity="0.6"/>
+  <!-- flowers -->
+  <circle cx="80" cy="358" r="8" fill="#FF8090"/>
+  <circle cx="120" cy="354" r="7" fill="#FFD060"/>
+  <circle cx="200" cy="360" r="8" fill="#FF90C0"/>
+  <circle cx="280" cy="355" r="7" fill="#FFAA60"/>
+  <circle cx="350" cy="358" r="8" fill="#FF8090"/>
+  <!-- Gota bouncing joyfully — repositioned to centre/upper area -->
+  <path d="M215,230 Q195,262 195,285 Q195,312 215,320 Q235,312 235,285 Q235,262 215,230Z" fill="#50B8E0"/>
+  <path d="M215,232 Q198,262 198,285 Q198,310 215,317 Q232,310 232,285 Q232,262 215,232Z" fill="#78CFF0"/>
+  <!-- joyful squinting eyes -->
+  <path d="M207 280 Q212 275 217 280" stroke="#1A5A7A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M213 280 Q218 275 223 280" stroke="#1A5A7A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- big happy mouth -->
+  <path d="M207 292 Q215 303 223 292" stroke="#1A5A7A" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <circle cx="202" cy="287" r="6" fill="#FFB0C0" opacity="0.6"/>
+  <circle cx="228" cy="287" r="6" fill="#FFB0C0" opacity="0.6"/>
+  <!-- arms wide -->
+  <ellipse cx="184" cy="285" rx="22" ry="9" fill="#50B8E0" transform="rotate(-25 184 285)"/>
+  <ellipse cx="246" cy="281" rx="22" ry="9" fill="#50B8E0" transform="rotate(25 246 281)"/>
+  <!-- sparkles -->
+  <circle cx="165" cy="248" r="4" fill="#C0EEFF" opacity="0.8"/>
+  <circle cx="265" cy="243" r="3.5" fill="#C0EEFF" opacity="0.7"/>
+  <circle cx="160" cy="310" r="3" fill="#C0EEFF" opacity="0.7"/>
+  <circle cx="268" cy="305" r="3.5" fill="#C0EEFF" opacity="0.7"/>
+</svg>
+</div>
+<div class="text-box" style="background:#C8EEF8">
+  <p>Gota saiu saltitando pelo jardim. Cada florzinha que ela tocava ficava mais brilhante!</p>
+</div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="page-7" style="background:#E8F8FF">
+<div class="illustration" style="height:57%">
+<svg viewBox="0 0 430 528" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="528" fill="#C0E8F8"/>
+  <rect x="0" y="330" width="430" height="198" fill="#80B8D0"/>
+  <!-- river scene, Gota at the river edge -->
+  <!-- river flowing -->
+  <rect x="0" y="330" width="430" height="198" fill="#60A8C8"/>
+  <!-- water ripples/waves -->
+  <path d="M0,350 Q50,340 100,355 Q150,365 200,350 Q250,338 300,352 Q370,365 430,348" stroke="#80C8E0" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M0,375 Q60,362 120,377 Q180,388 240,372 Q300,360 360,374 Q400,382 430,370" stroke="#80C8E0" stroke-width="2.5" fill="none" opacity="0.6"/>
+  <!-- fish in river -->
+  <!-- fish 1 -->
+  <ellipse cx="100" cy="390" rx="28" ry="14" fill="#F08040" opacity="0.85"/>
+  <polygon points="75,390 62,376 62,404" fill="#E07030" opacity="0.85"/>
+  <ellipse cx="110" cy="386" rx="4" ry="5" fill="#2A1010" opacity="0.8"/>
+  <circle cx="111.5" cy="384.5" r="1.5" fill="#fff" opacity="0.8"/>
+  <!-- fish 2 -->
+  <ellipse cx="300" cy="405" rx="24" ry="12" fill="#60D080" opacity="0.8"/>
+  <polygon points="278,405 266,393 266,417" fill="#50C070" opacity="0.8"/>
+  <ellipse cx="309" cy="401" rx="3.5" ry="4" fill="#1A3010" opacity="0.8"/>
+  <!-- Gota at river bank, looking at reflection in water, amazed -->
+  <rect x="0" y="310" width="430" height="25" fill="#90C870"/>
+  <!-- bank flowers -->
+  <circle cx="60" cy="314" r="6" fill="#FF8090"/>
+  <circle cx="380" cy="316" r="6" fill="#FFD060"/>
+  <!-- Gota leaning over -->
+  <path d="M215,250 Q196,280 196,300 Q196,325 215,332 Q234,325 234,300 Q234,280 215,250Z" fill="#50B8E0"/>
+  <path d="M215,252 Q199,280 199,300 Q199,323 215,329 Q231,323 231,300 Q231,280 215,252Z" fill="#78CFF0"/>
+  <!-- wondering eyes looking down at reflection -->
+  <ellipse cx="207" cy="296" rx="5" ry="5.5" fill="#1A5A7A"/>
+  <ellipse cx="223" cy="296" rx="5" ry="5.5" fill="#1A5A7A"/>
+  <circle cx="209.5" cy="293.5" r="2" fill="#fff"/>
+  <circle cx="225.5" cy="293.5" r="2" fill="#fff"/>
+  <path d="M209 308 Q215 315 221 308" stroke="#1A5A7A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="202" cy="303" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <circle cx="228" cy="303" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <!-- arms hanging down looking at water -->
+  <ellipse cx="194" cy="302" rx="15" ry="7" fill="#50B8E0" transform="rotate(20 194 302)"/>
+  <ellipse cx="236" cy="298" rx="15" ry="7" fill="#50B8E0" transform="rotate(-20 236 298)"/>
+  <!-- Gota's reflection in water (upside-down, wobbly) -->
+  <path d="M215,335 Q200,345 200,352 Q200,360 215,363 Q230,360 230,352 Q230,345 215,335Z" fill="#60C8F0" opacity="0.5"/>
+  <ellipse cx="209" cy="351" rx="3" ry="3" fill="#1A5A7A" opacity="0.4"/>
+  <ellipse cx="221" cy="351" rx="3" ry="3" fill="#1A5A7A" opacity="0.4"/>
+</svg>
+</div>
+<div class="text-box" style="background:#E8F8FF">
+  <p>No caminho, Gota encontrou um rio largo e fundo.</p>
+  <p>— <em>"Tem alguém lá dentro me olhando!"</em> — ela disse, vendo seu reflexo na água.</p>
+</div>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" id="page-8" style="background:#EAF8EE">
+<div class="illustration" style="height:56%">
+<svg viewBox="0 0 430 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="520" fill="#B8E8C8"/>
+  <!-- river scene, fish friend -->
+  <rect x="0" y="280" width="430" height="240" fill="#60A8C8"/>
+  <rect x="0" y="270" width="430" height="18" fill="#80B840"/>
+  <!-- water waves -->
+  <path d="M0,300 Q60,288 120,303 Q180,315 240,298 Q300,284 360,300 Q400,310 430,295" stroke="#90CCEA" stroke-width="2.5" fill="none" opacity="0.6"/>
+  <!-- Big friendly fish jumping out to say hi -->
+  <!-- fish body -->
+  <ellipse cx="280" cy="260" rx="60" ry="28" fill="#F08040"/>
+  <!-- fish tail -->
+  <polygon points="222,260 200,238 200,282" fill="#E07030"/>
+  <!-- fish fins -->
+  <ellipse cx="268" cy="238" rx="20" ry="10" fill="#E88030" transform="rotate(-30 268 238)"/>
+  <!-- fish face -->
+  <ellipse cx="318" cy="252" rx="6" ry="7" fill="#2A1010"/>
+  <circle cx="320" cy="249.5" r="2.5" fill="#fff"/>
+  <!-- fish smile friendly -->
+  <path d="M316 264 Q323 272 330 264" stroke="#2A1010" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- fish speaking bubble -->
+  <rect x="310" y="215" width="105" height="32" rx="10" fill="#FFFFFF" opacity="0.9"/>
+  <polygon points="325,247 340,230 348,247" fill="#FFFFFF" opacity="0.9"/>
+  <text x="362" y="229" text-anchor="middle" font-size="10" fill="#1A5A7A" font-family="Nunito,sans-serif" font-weight="700">Oi, Gota!</text>
+  <text x="362" y="241" text-anchor="middle" font-size="10" fill="#1A5A7A" font-family="Nunito,sans-serif" font-weight="700">Sou o Brim! 🐟</text>
+  <!-- water splashes -->
+  <ellipse cx="240" cy="275" rx="18" ry="8" fill="#A0D8F0" opacity="0.7"/>
+  <ellipse cx="310" cy="278" rx="14" ry="6" fill="#A0D8F0" opacity="0.6"/>
+  <!-- Gota at water edge, happy, waving -->
+  <path d="M130,210 Q112,240 112,260 Q112,285 130,292 Q148,285 148,260 Q148,240 130,210Z" fill="#50B8E0"/>
+  <path d="M130,212 Q115,240 115,260 Q115,283 130,289 Q145,283 145,260 Q145,240 130,212Z" fill="#78CFF0"/>
+  <path d="M123 257 Q130 264 137 257" stroke="#1A5A7A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="122" cy="248" rx="4.5" ry="5" fill="#1A5A7A"/>
+  <ellipse cx="138" cy="248" rx="4.5" ry="5" fill="#1A5A7A"/>
+  <circle cx="123.5" cy="246" r="1.8" fill="#fff"/>
+  <circle cx="139.5" cy="246" r="1.8" fill="#fff"/>
+  <circle cx="117" cy="254" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <circle cx="143" cy="254" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <!-- wave arm -->
+  <ellipse cx="108" cy="248" rx="18" ry="7" fill="#50B8E0" transform="rotate(-40 108 248)"/>
+  <ellipse cx="152" cy="245" rx="16" ry="7" fill="#50B8E0" transform="rotate(15 152 245)"/>
+</svg>
+</div>
+<div class="text-box" style="background:#EAF8EE">
+  <p>Era o peixe Brim, que pulou da água para dizer olá!</p>
+  <p>— <em>"Posso nadar contigo?"</em> — Gota perguntou animada.</p>
+</div>
+</div>
+
+<!-- PAGE 9 -->
+<div class="page" id="page-9">
+<svg viewBox="0 0 430 932" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
+  <rect width="430" height="932" fill="#70B8D8"/>
+  <!-- underwater scene, blue-green, beautiful -->
+  <rect width="430" height="932" fill="#3890B8"/>
+  <!-- light rays from surface -->
+  <polygon points="150,0 190,0 280,932 240,932" fill="#60B8D8" opacity="0.15"/>
+  <polygon points="250,0 280,0 370,932 340,932" fill="#60B8D8" opacity="0.12"/>
+  <polygon points="60,0 90,0 180,932 150,932" fill="#60B8D8" opacity="0.1"/>
+  <!-- water surface shimmer top -->
+  <path d="M0,0 Q80,20 160,5 Q240,-10 320,8 Q390,20 430,2" fill="#50A8C8" opacity="0.6"/>
+  <!-- seaweed -->
+  <path d="M60,932 Q80,850 65,780 Q50,710 70,640 Q88,570 70,500" stroke="#3A9040" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <path d="M370,932 Q355,845 368,770 Q380,700 362,628 Q345,558 360,488" stroke="#2A8030" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <path d="M180,932 Q195,870 182,810 Q168,750 185,690" stroke="#3A9040" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <!-- colorful fish swimming -->
+  <!-- fish group -->
+  <ellipse cx="320" cy="300" rx="30" ry="14" fill="#F08040" opacity="0.9"/>
+  <polygon points="292,300 278,288 278,312" fill="#E07030" opacity="0.9"/>
+  <ellipse cx="330" cy="295" rx="4" ry="5" fill="#1A0808" opacity="0.8"/>
+  <ellipse cx="270" cy="380" rx="25" ry="12" fill="#D060A0" opacity="0.85"/>
+  <polygon points="247,380 235,370 235,390" fill="#C050908" opacity="0.85"/>
+  <ellipse cx="340" cy="500" rx="28" ry="13" fill="#60C060" opacity="0.8"/>
+  <!-- coral at bottom -->
+  <ellipse cx="100" cy="900" rx="45" ry="30" fill="#E05040" opacity="0.8"/>
+  <ellipse cx="120" cy="880" rx="15" ry="30" fill="#E06050" opacity="0.8"/>
+  <ellipse cx="90" cy="875" rx="12" ry="25" fill="#D04035" opacity="0.8"/>
+  <ellipse cx="330" cy="895" rx="40" ry="25" fill="#F07040" opacity="0.75"/>
+  <!-- bubbles -->
+  <circle cx="200" cy="800" r="8" fill="#FFFFFF" opacity="0.2"/>
+  <circle cx="180" cy="740" r="5" fill="#FFFFFF" opacity="0.2"/>
+  <circle cx="215" cy="680" r="7" fill="#FFFFFF" opacity="0.18"/>
+  <circle cx="240" cy="600" r="6" fill="#FFFFFF" opacity="0.2"/>
+  <!-- Gota swimming with fish Brim, both look happy underwater -->
+  <!-- Brim -->
+  <ellipse cx="270" cy="460" rx="48" ry="22" fill="#F08040" opacity="0.9"/>
+  <polygon points="224,460 208,444 208,476" fill="#E07030" opacity="0.9"/>
+  <ellipse cx="310" cy="453" rx="5.5" ry="6.5" fill="#1A0808"/>
+  <circle cx="312" cy="450.5" r="2.2" fill="#fff"/>
+  <path d="M308 470 Q316 478 324 470" stroke="#1A0808" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Gota swimming beside Brim -->
+  <path d="M170,440 Q155,458 155,472 Q155,490 170,496 Q185,490 185,472 Q185,458 170,440Z" fill="#50B8E0"/>
+  <path d="M170,442 Q158,458 158,472 Q158,489 170,494 Q182,489 182,472 Q182,458 170,442Z" fill="#78CFF0"/>
+  <path d="M164 469 Q170 476 176 469" stroke="#1A5A7A" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <ellipse cx="164" cy="462" rx="4.5" ry="5" fill="#1A5A7A"/>
+  <ellipse cx="176" cy="462" rx="4.5" ry="5" fill="#1A5A7A"/>
+  <circle cx="165.5" cy="460" r="1.8" fill="#fff"/>
+  <circle cx="177.5" cy="460" r="1.8" fill="#fff"/>
+  <!-- bubbles from gota swimming -->
+  <circle cx="158" cy="440" r="5" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="148" cy="428" r="4" fill="#FFFFFF" opacity="0.25"/>
+</svg>
+<div class="text-overlay" style="bottom:100px">
+  <div class="bubble-dark">
+    <p>Gota mergulhou no rio e nadou com Brim entre peixes coloridos e corais encantados.</p>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 10 -->
+<div class="page" id="page-10" style="background:#F0F8FF">
+<div class="illustration" style="height:57%">
+<svg viewBox="0 0 430 528" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="528" fill="#B8D8F0"/>
+  <rect x="0" y="320" width="430" height="208" fill="#80B8D0"/>
+  <!-- waterfall scene! -->
+  <!-- rocks -->
+  <ellipse cx="215" cy="380" rx="160" ry="60" fill="#808898"/>
+  <ellipse cx="100" cy="420" rx="90" ry="45" fill="#707080"/>
+  <ellipse cx="335" cy="415" rx="95" ry="48" fill="#707080"/>
+  <!-- waterfall coming down -->
+  <rect x="170" y="0" width="90" height="330" fill="#80C8E8" opacity="0.7" rx="8"/>
+  <rect x="182" y="0" width="25" height="330" fill="#A0D8F4" opacity="0.6" rx="4"/>
+  <rect x="215" y="0" width="18" height="330" fill="#FFFFFF" opacity="0.35" rx="3"/>
+  <!-- mist at bottom of waterfall -->
+  <ellipse cx="215" cy="335" rx="120" ry="38" fill="#C8E8F8" opacity="0.8"/>
+  <ellipse cx="215" cy="348" rx="95" ry="28" fill="#D8F0FF" opacity="0.7"/>
+  <!-- water splash circles -->
+  <ellipse cx="215" cy="360" rx="70" ry="18" fill="#A0D0E8" opacity="0.6"/>
+  <ellipse cx="215" cy="368" rx="50" ry="12" fill="#B0DCF0" opacity="0.5"/>
+  <!-- GOTA riding the waterfall down, arms in air, super excited -->
+  <path d="M215,155 Q197,183 197,202 Q197,226 215,232 Q233,226 233,202 Q233,183 215,155Z" fill="#50B8E0"/>
+  <path d="M215,157 Q200,183 200,202 Q200,224 215,230 Q230,224 230,202 Q230,183 215,157Z" fill="#78CFF0"/>
+  <!-- HUGE excited eyes -->
+  <ellipse cx="206" cy="198" rx="6.5" ry="7" fill="#1A5A7A"/>
+  <ellipse cx="224" cy="198" rx="6.5" ry="7" fill="#1A5A7A"/>
+  <circle cx="208.5" cy="195" r="2.8" fill="#fff"/>
+  <circle cx="226.5" cy="195" r="2.8" fill="#fff"/>
+  <!-- huge open joy mouth -->
+  <path d="M206 210 Q215 222 224 210" stroke="#1A5A7A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="200" cy="205" r="6.5" fill="#FFB0C0" opacity="0.6"/>
+  <circle cx="230" cy="205" r="6.5" fill="#FFB0C0" opacity="0.6"/>
+  <!-- arms way up weeee -->
+  <ellipse cx="186" cy="185" rx="22" ry="9" fill="#50B8E0" transform="rotate(-60 186 185)"/>
+  <ellipse cx="244" cy="180" rx="22" ry="9" fill="#50B8E0" transform="rotate(60 244 180)"/>
+  <!-- sparkle drops -->
+  <circle cx="165" cy="160" r="4" fill="#C0EEFF" opacity="0.9"/>
+  <circle cx="268" cy="155" r="3.5" fill="#C0EEFF" opacity="0.8"/>
+  <circle cx="158" cy="205" r="3" fill="#C0EEFF" opacity="0.8"/>
+  <circle cx="272" cy="200" r="3.5" fill="#C0EEFF" opacity="0.8"/>
+  <circle cx="180" cy="130" r="3" fill="#C0EEFF" opacity="0.7"/>
+</svg>
+</div>
+<div class="text-box" style="background:#F0F8FF">
+  <p>O rio levou Gota até uma cachoeira gigantesca!</p>
+  <p>— <em>"WEEEE!"</em> — ela gritou de alegria, descendo com a água.</p>
+</div>
+</div>
+
+<!-- PAGE 11 -->
+<div class="page" id="page-11" style="background:#E8F4F8">
+<div class="illustration" style="height:56%">
+<svg viewBox="0 0 430 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="520" fill="#C0E0F0"/>
+  <!-- open ocean! horizon -->
+  <rect x="0" y="260" width="430" height="260" fill="#2880B8"/>
+  <rect x="0" y="0" width="430" height="265" fill="#A0D0F0"/>
+  <!-- sun in sky -->
+  <circle cx="340" cy="70" r="50" fill="#FFE890" opacity="0.8"/>
+  <circle cx="340" cy="70" r="40" fill="#FFD860" opacity="0.9"/>
+  <!-- clouds small -->
+  <ellipse cx="80" cy="80" rx="60" ry="32" fill="#E8F4FF" opacity="0.85"/>
+  <ellipse cx="45" cy="95" rx="38" ry="24" fill="#E8F4FF" opacity="0.85"/>
+  <ellipse cx="120" cy="92" rx="42" ry="26" fill="#E8F4FF" opacity="0.85"/>
+  <!-- ocean waves -->
+  <path d="M0,270 Q50,256 100,272 Q150,285 200,268 Q250,254 300,270 Q360,284 430,264" stroke="#3898C8" stroke-width="4" fill="none"/>
+  <path d="M0,295 Q60,280 120,296 Q180,310 240,292 Q300,278 360,294 Q400,304 430,290" stroke="#4AA8D8" stroke-width="3" fill="none" opacity="0.7"/>
+  <!-- seagulls -->
+  <path d="M100,120 Q115,110 130,120" stroke="#2A5A7A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M160,95 Q175,85 190,95" stroke="#2A5A7A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M240,110 Q255,100 270,110" stroke="#2A5A7A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Gota floating on ocean surface amazed, tiny on the waves -->
+  <path d="M215,238 Q200,258 200,270 Q200,286 215,291 Q230,286 230,270 Q230,258 215,238Z" fill="#50B8E0"/>
+  <path d="M215,240 Q203,258 203,270 Q203,284 215,288 Q227,284 227,270 Q227,258 215,240Z" fill="#78CFF0"/>
+  <!-- wonder in eyes, wide, mouth open with awe -->
+  <ellipse cx="207" cy="267" rx="5.5" ry="6" fill="#1A5A7A"/>
+  <ellipse cx="223" cy="267" rx="5.5" ry="6" fill="#1A5A7A"/>
+  <circle cx="209.5" cy="264.5" r="2.2" fill="#fff"/>
+  <circle cx="225.5" cy="264.5" r="2.2" fill="#fff"/>
+  <!-- O mouth in awe -->
+  <ellipse cx="215" cy="278" rx="4.5" ry="5.5" fill="#1A5A7A"/>
+  <circle cx="202" cy="273" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <circle cx="228" cy="273" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <!-- tiny arms at side, overwhelmed with beauty -->
+  <ellipse cx="196" cy="270" rx="13" ry="6" fill="#50B8E0" transform="rotate(10 196 270)"/>
+  <ellipse cx="234" cy="267" rx="13" ry="6" fill="#50B8E0" transform="rotate(-10 234 267)"/>
+</svg>
+</div>
+<div class="text-box" style="background:#E8F4F8">
+  <p>Depois da cachoeira, Gota chegou ao mar!</p>
+  <p>Nunca tinha visto tanta água junta em um só lugar. Era lindo e imenso.</p>
+</div>
+</div>
+
+<!-- PAGE 12 -->
+<div class="page" id="page-12" style="background:#083850">
+<div class="illustration" style="height:65%">
+<svg viewBox="0 0 430 620" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <defs>
+    <radialGradient id="oceanBg" cx="50%" cy="20%" r="80%">
+      <stop offset="0%" stop-color="#2880B8"/>
+      <stop offset="100%" stop-color="#083850"/>
+    </radialGradient>
+  </defs>
+  <rect width="430" height="620" fill="url(#oceanBg)"/>
+  <!-- light rays -->
+  <polygon points="140,0 200,0 310,620 250,620" fill="#40A8D0" opacity="0.08"/>
+  <polygon points="220,0 260,0 380,620 340,620" fill="#40A8D0" opacity="0.06"/>
+  <!-- jellyfish 1 — repositioned upper left -->
+  <ellipse cx="80" cy="120" rx="36" ry="24" fill="#E090C0" opacity="0.7"/>
+  <path d="M60,144 Q63,168 58,192" stroke="#E090C0" stroke-width="2.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path d="M73,146 Q76,172 70,198" stroke="#E090C0" stroke-width="2" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path d="M89,145 Q93,171 87,197" stroke="#E090C0" stroke-width="2.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path d="M101,143 Q105,167 99,191" stroke="#E090C0" stroke-width="2" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <ellipse cx="72" cy="114" rx="3.5" ry="4" fill="#C060A0" opacity="0.7"/>
+  <ellipse cx="88" cy="114" rx="3.5" ry="4" fill="#C060A0" opacity="0.7"/>
+  <path d="M70 122 Q80 129 90 122" stroke="#C060A0" stroke-width="1.8" fill="none" opacity="0.7"/>
+  <!-- jellyfish 2 — upper right -->
+  <ellipse cx="340" cy="180" rx="32" ry="20" fill="#90C0E0" opacity="0.65"/>
+  <path d="M320,200 Q323,224 318,248" stroke="#90C0E0" stroke-width="2.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path d="M332,202 Q336,228 330,254" stroke="#90C0E0" stroke-width="2" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path d="M348,201 Q352,227 346,253" stroke="#90C0E0" stroke-width="2.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path d="M360,198 Q363,222 358,246" stroke="#90C0E0" stroke-width="2" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <ellipse cx="332" cy="174" rx="3.5" ry="4" fill="#6090C0" opacity="0.7"/>
+  <ellipse cx="346" cy="174" rx="3.5" ry="4" fill="#6090C0" opacity="0.7"/>
+  <!-- seaweed -->
+  <path d="M30,620 Q50,560 38,500 Q26,440 42,380" stroke="#3A9040" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M400,620 Q385,555 396,495 Q407,435 392,375" stroke="#2A8030" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- sea turtle — fully repositioned to centre, well visible -->
+  <ellipse cx="220" cy="440" rx="65" ry="50" fill="#3A8840"/>
+  <ellipse cx="220" cy="438" rx="40" ry="32" fill="#2A7030"/>
+  <ellipse cx="205" cy="428" rx="14" ry="12" fill="#3A9040"/>
+  <ellipse cx="235" cy="428" rx="14" ry="12" fill="#3A9040"/>
+  <ellipse cx="220" cy="450" rx="14" ry="12" fill="#3A9040"/>
+  <!-- turtle head -->
+  <ellipse cx="272" cy="430" rx="25" ry="20" fill="#4A9848"/>
+  <ellipse cx="280" cy="424" rx="4" ry="4.5" fill="#1A3010"/>
+  <ellipse cx="290" cy="424" rx="4" ry="4.5" fill="#1A3010"/>
+  <path d="M278 435 Q285 442 292 435" stroke="#1A3010" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- turtle flippers -->
+  <ellipse cx="168" cy="420" rx="30" ry="12" fill="#3A8840" transform="rotate(-20 168 420)"/>
+  <ellipse cx="170" cy="462" rx="28" ry="12" fill="#3A8840" transform="rotate(20 170 462)"/>
+  <ellipse cx="272" cy="470" rx="25" ry="10" fill="#3A8840" transform="rotate(-10 272 470)"/>
+  <!-- Gota on turtle's back -->
+  <path d="M218,400 Q205,418 205,430 Q205,445 218,450 Q231,445 231,430 Q231,418 218,400Z" fill="#50B8E0"/>
+  <path d="M218,402 Q208,418 208,430 Q208,443 218,447 Q228,443 228,430 Q228,418 218,402Z" fill="#78CFF0"/>
+  <path d="M211 428 Q218 435 225 428" stroke="#1A5A7A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="212" cy="420" rx="4.5" ry="5" fill="#1A5A7A"/>
+  <ellipse cx="224" cy="420" rx="4.5" ry="5" fill="#1A5A7A"/>
+  <circle cx="213.5" cy="418" r="1.8" fill="#fff"/>
+  <circle cx="225.5" cy="418" r="1.8" fill="#fff"/>
+  <ellipse cx="196" cy="420" rx="18" ry="7" fill="#50B8E0" transform="rotate(-50 196 420)"/>
+  <ellipse cx="240" cy="416" rx="18" ry="7" fill="#50B8E0" transform="rotate(50 240 416)"/>
+  <!-- bubbles -->
+  <circle cx="80" cy="320" r="7" fill="#fff" opacity="0.15"/>
+  <circle cx="350" cy="260" r="6" fill="#fff" opacity="0.15"/>
+  <circle cx="160" cy="530" r="8" fill="#fff" opacity="0.12"/>
+  <circle cx="300" cy="560" r="5" fill="#fff" opacity="0.13"/>
+  <!-- coral at bottom -->
+  <ellipse cx="80" cy="610" rx="40" ry="20" fill="#E05040" opacity="0.7"/>
+  <ellipse cx="340" cy="615" rx="38" ry="18" fill="#F07040" opacity="0.65"/>
+</svg>
+</div>
+<div class="text-box" style="background:#083850">
+  <p style="color:#C0E8FF;">No fundo do mar, Gota fez amizade com uma tartaruga gigante chamada Tati, que nadava devagarzinho por todos os cantos do oceano.</p>
+</div>
+</div>
+
+<!-- PAGE 13 -->
+<div class="page" id="page-13" style="background:#FFF8E8">
+<div class="illustration" style="height:55%">
+<svg viewBox="0 0 430 510" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="510" fill="#F0E8C0"/>
+  <!-- beach scene, sunset beginning -->
+  <rect x="0" y="300" width="430" height="210" fill="#D0A870"/>
+  <!-- ocean with warm colors -->
+  <rect x="0" y="220" width="430" height="90" fill="#E0A040" opacity="0.5"/>
+  <rect x="0" y="220" width="430" height="90" fill="#3888B8"/>
+  <!-- warm sunset sky -->
+  <rect x="0" y="0" width="430" height="225" fill="#F8C870"/>
+  <ellipse cx="215" cy="0" rx="280" ry="180" fill="#F0A040" opacity="0.4"/>
+  <!-- sun setting -->
+  <circle cx="215" cy="210" r="70" fill="#FFB820" opacity="0.8"/>
+  <circle cx="215" cy="210" r="56" fill="#FF9820" opacity="0.8"/>
+  <!-- ocean waves warm -->
+  <path d="M0,235 Q60,220 120,236 Q180,250 240,232 Q300,217 360,234 Q400,245 430,228" stroke="#F0B040" stroke-width="3" fill="none" opacity="0.7"/>
+  <!-- shells on beach -->
+  <ellipse cx="80" cy="310" rx="20" ry="12" fill="#F0C890" transform="rotate(20 80 310)"/>
+  <ellipse cx="82" cy="308" rx="16" ry="9" fill="#E8B880" transform="rotate(20 82 308)"/>
+  <ellipse cx="360" cy="316" rx="16" ry="10" fill="#F0C890" transform="rotate(-15 360 316)"/>
+  <!-- Gota on beach alone looking at the sunset, thoughtful/warm -->
+  <path d="M215,248 Q200,268 200,280 Q200,297 215,302 Q230,297 230,280 Q230,268 215,248Z" fill="#50B8E0"/>
+  <path d="M215,250 Q203,268 203,280 Q203,295 215,299 Q227,295 227,280 Q227,268 215,250Z" fill="#78CFF0"/>
+  <!-- warm peaceful squinting eyes -->
+  <path d="M207 276 Q212 271 217 276" stroke="#1A5A7A" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <path d="M213 276 Q218 271 223 276" stroke="#1A5A7A" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <!-- gentle smile content -->
+  <path d="M208 285 Q215 292 222 285" stroke="#1A5A7A" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <circle cx="202" cy="281" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <circle cx="228" cy="281" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <!-- arms resting, relaxed -->
+  <ellipse cx="196" cy="280" rx="14" ry="6" fill="#50B8E0" transform="rotate(5 196 280)"/>
+  <ellipse cx="234" cy="278" rx="14" ry="6" fill="#50B8E0" transform="rotate(-5 234 278)"/>
+  <!-- shine on gota warm -->
+  <ellipse cx="206" cy="258" rx="6" ry="10" fill="#fff" opacity="0.3" transform="rotate(-15 206 258)"/>
+</svg>
+</div>
+<div class="text-box" style="background:#FFF8E8">
+  <p>À tardinha, Gota chegou à praia e sentou na areia fofa.</p>
+  <p>Olhou para o pôr do sol e suspirou. Que dia cheio de coisas!</p>
+</div>
+</div>
+
+<!-- PAGE 14 -->
+<div class="page" id="page-14" style="background:#F0F4FF">
+<div class="illustration" style="height:56%">
+<svg viewBox="0 0 430 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="520" fill="#D8E8F8"/>
+  <!-- night coming, first stars -->
+  <rect width="430" height="520" fill="#C0D0E8"/>
+  <ellipse cx="215" cy="0" rx="300" ry="200" fill="#A0B8D8" opacity="0.5"/>
+  <!-- stars appearing -->
+  <circle cx="50" cy="40" r="2" fill="#FFFAE0" opacity="0.8"/>
+  <circle cx="350" cy="30" r="2.5" fill="#FFFAE0" opacity="0.9"/>
+  <circle cx="200" cy="20" r="1.8" fill="#FFFAE0" opacity="0.8"/>
+  <circle cx="120" cy="70" r="1.5" fill="#FFFAE0" opacity="0.7"/>
+  <circle cx="380" cy="65" r="2" fill="#FFFAE0" opacity="0.8"/>
+  <circle cx="290" cy="45" r="1.5" fill="#FFFAE0" opacity="0.7"/>
+  <!-- moon -->
+  <circle cx="350" cy="100" r="45" fill="#FFF8D0" opacity="0.9"/>
+  <circle cx="365" cy="90" r="40" fill="#C8D8F0"/>
+  <!-- ocean at night, calm -->
+  <rect x="0" y="300" width="430" height="220" fill="#183860"/>
+  <path d="M0,310 Q80,295 160,312 Q240,326 320,308 Q380,296 430,314" stroke="#2050A0" stroke-width="3" fill="none" opacity="0.6"/>
+  <!-- Gota looking up at sky, nostalgic, a bit homesick -->
+  <path d="M215,240 Q198,265 198,280 Q198,300 215,306 Q232,300 232,280 Q232,265 215,240Z" fill="#50B8E0"/>
+  <path d="M215,242 Q201,265 201,280 Q201,298 215,303 Q229,298 229,280 Q229,265 215,242Z" fill="#78CFF0"/>
+  <!-- thoughtful looking up eyes -->
+  <ellipse cx="207" cy="277" rx="5.5" ry="6" fill="#1A5A7A"/>
+  <ellipse cx="223" cy="277" rx="5.5" ry="6" fill="#1A5A7A"/>
+  <circle cx="209.5" cy="274.5" r="2.2" fill="#fff"/>
+  <!-- pupil looking up/right toward sky -->
+  <circle cx="210.5" cy="273.5" r="1.2" fill="#1A5A7A"/>
+  <circle cx="226.5" cy="273.5" r="1.2" fill="#1A5A7A"/>
+  <!-- slight sad-thoughtful mouth -->
+  <path d="M209 288 Q215 292 221 288" stroke="#1A5A7A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="202" cy="284" r="5" fill="#FFB0C0" opacity="0.45"/>
+  <circle cx="228" cy="284" r="5" fill="#FFB0C0" opacity="0.45"/>
+  <!-- tiny teardrop / missing home -->
+  <ellipse cx="202" cy="293" rx="3" ry="4" fill="#80C8F0" opacity="0.7"/>
+  <!-- arms hugging self -->
+  <ellipse cx="198" cy="285" rx="15" ry="6" fill="#50B8E0" transform="rotate(25 198 285)"/>
+  <ellipse cx="232" cy="282" rx="15" ry="6" fill="#50B8E0" transform="rotate(-25 232 282)"/>
+</svg>
+</div>
+<div class="text-box" style="background:#F0F4FF">
+  <p>Quando as estrelas apareceram, Gota sentiu uma saudadezinha.</p>
+  <p>— <em>"Será que minha nuvem está me esperando?"</em> — ela pensou.</p>
+</div>
+</div>
+
+<!-- PAGE 15 -->
+<div class="page" id="page-15">
+<svg viewBox="0 0 430 932" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
+  <defs>
+    <radialGradient id="nightBg" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#183870"/>
+      <stop offset="100%" stop-color="#040C20"/>
+    </radialGradient>
+  </defs>
+  <rect width="430" height="932" fill="url(#nightBg)"/>
+  <!-- stars -->
+  <circle cx="40" cy="45" r="1.8" fill="#FFFAE0" opacity="0.9"/>
+  <circle cx="105" cy="25" r="1.2" fill="#FFFAE0" opacity="0.8"/>
+  <circle cx="195" cy="18" r="2.2" fill="#FFFAE0" opacity="0.95"/>
+  <circle cx="305" cy="38" r="1.5" fill="#FFFAE0" opacity="0.8"/>
+  <circle cx="400" cy="28" r="1.8" fill="#FFFAE0" opacity="0.85"/>
+  <circle cx="60" cy="130" r="1.2" fill="#FFFAE0" opacity="0.7"/>
+  <circle cx="370" cy="120" r="1.5" fill="#FFFAE0" opacity="0.8"/>
+  <circle cx="165" cy="90" r="1" fill="#FFFAE0" opacity="0.7"/>
+  <circle cx="255" cy="70" r="1.5" fill="#FFFAE0" opacity="0.8"/>
+  <circle cx="420" cy="160" r="1.2" fill="#FFFAE0" opacity="0.65"/>
+  <circle cx="22" cy="240" r="1" fill="#FFFAE0" opacity="0.6"/>
+  <!-- moon large -->
+  <circle cx="215" cy="220" r="100" fill="#FFF8D0" opacity="0.08"/>
+  <circle cx="215" cy="220" r="78" fill="#FFF8D0" opacity="0.12"/>
+  <circle cx="215" cy="220" r="58" fill="#FFF8D0" opacity="0.85"/>
+  <circle cx="215" cy="220" r="52" fill="#FFFCE0"/>
+  <!-- moon craters -->
+  <circle cx="198" cy="208" r="8" fill="#F5EAB0" opacity="0.5"/>
+  <circle cx="230" cy="232" r="6" fill="#F5EAB0" opacity="0.4"/>
+  <!-- warmth from moon rays suggesting going up -->
+  <line x1="215" y1="162" x2="215" y2="130" stroke="#FFF8D0" stroke-width="2" opacity="0.3"/>
+  <line x1="250" y1="175" x2="268" y2="148" stroke="#FFF8D0" stroke-width="1.5" opacity="0.25"/>
+  <line x1="180" y1="175" x2="162" y2="148" stroke="#FFF8D0" stroke-width="1.5" opacity="0.25"/>
+  <!-- Gota rising up from ocean, evaporating! becoming vapor -->
+  <!-- Gota at bottom, then trail of tiny drops going up -->
+  <!-- tiny drops trail upward -->
+  <ellipse cx="215" cy="820" rx="18" ry="22" fill="#60C0E8" opacity="0.9"/>
+  <ellipse cx="215" cy="820" rx="15" ry="19" fill="#80D4F4" opacity="0.9"/>
+  <ellipse cx="214" cy="745" rx="14" ry="18" fill="#60C0E8" opacity="0.75"/>
+  <ellipse cx="216" cy="672" rx="12" ry="15" fill="#60C0E8" opacity="0.6"/>
+  <ellipse cx="213" cy="608" rx="10" ry="13" fill="#60C0E8" opacity="0.5"/>
+  <ellipse cx="216" cy="550" rx="9" ry="11" fill="#60C0E8" opacity="0.4"/>
+  <ellipse cx="214" cy="498" rx="7.5" ry="9.5" fill="#60C0E8" opacity="0.35"/>
+  <!-- Gota face at bottom, looking up happily, being lifted -->
+  <!-- main gota large -->
+  <ellipse cx="207" cy="808" rx="5.5" ry="6" fill="#1A5A7A"/>
+  <ellipse cx="223" cy="808" rx="5.5" ry="6" fill="#1A5A7A"/>
+  <circle cx="209.5" cy="805.5" r="2.2" fill="#fff"/>
+  <circle cx="225.5" cy="805.5" r="2.2" fill="#fff"/>
+  <path d="M208 818 Q215 826 222 818" stroke="#1A5A7A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="202" cy="814" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <circle cx="228" cy="814" r="5" fill="#FFB0C0" opacity="0.5"/>
+  <!-- arms spread -->
+  <ellipse cx="193" cy="812" rx="17" ry="7" fill="#60C0E8" opacity="0.9" transform="rotate(-20 193 812)"/>
+  <ellipse cx="237" cy="808" rx="17" ry="7" fill="#60C0E8" opacity="0.9" transform="rotate(20 237 808)"/>
+  <!-- ocean below gota -->
+  <rect x="0" y="860" width="430" height="72" fill="#183860"/>
+</svg>
+<div class="text-overlay" style="bottom:120px">
+  <div class="bubble-dark">
+    <p>O sol da manhã aqueceu o mar. E Gota começou a subir, subir, subir — virando vaporzinho levinho de novo!</p>
+  </div>
+</div>
+</div>
+
+<!-- PAGE 16 -->
+<div class="page" id="page-16" style="background:#D8EEF8">
+<div class="illustration" style="height:58%">
+<svg viewBox="0 0 430 540" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+  <rect width="430" height="540" fill="#A0C8E0"/>
+  <rect x="0" y="0" width="430" height="540" fill="#B0D0EA"/>
+  <!-- sky with clouds -->
+  <!-- Gota's cloud home glowing warmly -->
+  <ellipse cx="215" cy="200" rx="160" ry="100" fill="#E8F4FF"/>
+  <ellipse cx="95" cy="235" rx="98" ry="72" fill="#E8F4FF"/>
+  <ellipse cx="342" cy="225" rx="102" ry="75" fill="#E8F4FF"/>
+  <ellipse cx="215" cy="180" rx="112" ry="65" fill="#F4FAFF"/>
+  <ellipse cx="150" cy="205" rx="72" ry="53" fill="#F4FAFF"/>
+  <ellipse cx="288" cy="200" rx="76" ry="55" fill="#F4FAFF"/>
+  <!-- warm glow on cloud -->
+  <ellipse cx="215" cy="200" rx="60" ry="40" fill="#FFE890" opacity="0.2"/>
+  <!-- little door on cloud -->
+  <rect x="203" y="210" width="24" height="28" rx="5" fill="#B0CCDE"/>
+  <circle cx="224" cy="224" r="2.5" fill="#90AABB"/>
+  <!-- Gota floating up towards cloud, almost home -->
+  <path d="M215,330 Q198,358 198,376 Q198,400 215,406 Q232,400 232,376 Q232,358 215,330Z" fill="#50B8E0"/>
+  <path d="M215,332 Q201,358 201,376 Q201,398 215,403 Q229,398 229,376 Q229,358 215,332Z" fill="#78CFF0"/>
+  <!-- eyes looking up happily at cloud home -->
+  <path d="M207 372 Q212 366 217 372" stroke="#1A5A7A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M213 372 Q218 366 223 372" stroke="#1A5A7A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M207 382 Q215 390 223 382" stroke="#1A5A7A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="202" cy="378" r="5.5" fill="#FFB0C0" opacity="0.55"/>
+  <circle cx="228" cy="378" r="5.5" fill="#FFB0C0" opacity="0.55"/>
+  <!-- arms up reaching for cloud -->
+  <ellipse cx="186" cy="362" rx="20" ry="8" fill="#50B8E0" transform="rotate(-55 186 362)"/>
+  <ellipse cx="244" cy="357" rx="20" ry="8" fill="#50B8E0" transform="rotate(55 244 357)"/>
+  <!-- sparkle trail -->
+  <circle cx="165" cy="345" r="4" fill="#C0EEFF" opacity="0.8"/>
+  <circle cx="265" cy="340" r="3.5" fill="#C0EEFF" opacity="0.7"/>
+  <circle cx="160" cy="400" r="3" fill="#C0EEFF" opacity="0.7"/>
+  <circle cx="270" cy="395" r="3.5" fill="#C0EEFF" opacity="0.7"/>
+  <!-- other drops in cloud waving hello -->
+  <!-- tiny drop 1 -->
+  <path d="M165,215 Q160,222 160,227 Q160,233 165,235 Q170,233 170,227 Q170,222 165,215Z" fill="#60C0E8"/>
+  <ellipse cx="163" cy="226" rx="2" ry="2.5" fill="#1A5A7A"/>
+  <ellipse cx="167" cy="226" rx="2" ry="2.5" fill="#1A5A7A"/>
+  <path d="M163 229 Q165 232 167 229" stroke="#1A5A7A" stroke-width="1.2" fill="none"/>
+  <!-- tiny drop 2 -->
+  <path d="M265,210 Q260,217 260,222 Q260,228 265,230 Q270,228 270,222 Q270,217 265,210Z" fill="#60C0E8"/>
+  <ellipse cx="263" cy="221" rx="2" ry="2.5" fill="#1A5A7A"/>
+  <ellipse cx="267" cy="221" rx="2" ry="2.5" fill="#1A5A7A"/>
+  <path d="M263 224 Q265 227 267 224" stroke="#1A5A7A" stroke-width="1.2" fill="none"/>
+</svg>
+</div>
+<div class="text-box" style="background:#D8EEF8">
+  <p>Lá em cima, Gota viu sua nuvem novinha em folha, esperando por ela.</p>
+  <p>E dentro dela, seus amigos gotinhas acenavam felizes!</p>
+</div>
+</div>
+
+<!-- PAGE 17 -->
+<div class="page" id="page-17">
+<svg viewBox="0 0 430 932" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
+  <defs>
+    <radialGradient id="homeBg" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#2A5888"/>
+      <stop offset="70%" stop-color="#0C2848"/>
+      <stop offset="100%" stop-color="#040C1C"/>
+    </radialGradient>
+  </defs>
+  <rect width="430" height="932" fill="url(#homeBg)"/>
+  <!-- stars gentle -->
+  <circle cx="35" cy="50" r="1.8" fill="#FFFAE0" opacity="0.8"/>
+  <circle cx="395" cy="35" r="1.5" fill="#FFFAE0" opacity="0.75"/>
+  <circle cx="195" cy="22" r="2" fill="#FFFAE0" opacity="0.85"/>
+  <circle cx="310" cy="60" r="1.2" fill="#FFFAE0" opacity="0.7"/>
+  <circle cx="80" cy="100" r="1.5" fill="#FFFAE0" opacity="0.65"/>
+  <circle cx="420" cy="120" r="1" fill="#FFFAE0" opacity="0.6"/>
+  <circle cx="155" cy="80" r="1.2" fill="#FFFAE0" opacity="0.7"/>
+  <!-- HOME CLOUD — big, bright, warm, welcoming -->
+  <ellipse cx="215" cy="350" rx="185" ry="120" fill="#EAF2FF"/>
+  <ellipse cx="70" cy="400" rx="115" ry="88" fill="#EAF2FF"/>
+  <ellipse cx="368" cy="388" rx="118" ry="92" fill="#EAF2FF"/>
+  <ellipse cx="215" cy="328" rx="135" ry="80" fill="#F8FCFF"/>
+  <ellipse cx="145" cy="360" rx="88" ry="65" fill="#F8FCFF"/>
+  <ellipse cx="298" cy="355" rx="92" ry="67" fill="#F8FCFF"/>
+  <!-- warm golden glow inside cloud — HOME! -->
+  <ellipse cx="215" cy="360" rx="80" ry="55" fill="#FFE890" opacity="0.2"/>
+  <!-- door on cloud home -->
+  <rect x="200" y="368" width="30" height="38" rx="6" fill="#C0D8EE"/>
+  <circle cx="227" cy="387" r="3" fill="#A0B8CC"/>
+  <!-- windows on cloud -->
+  <rect x="152" y="358" width="28" height="22" rx="4" fill="#C8E8FF" opacity="0.8"/>
+  <line x1="166" y1="358" x2="166" y2="380" stroke="#A0C8E8" stroke-width="1.5"/>
+  <line x1="152" y1="369" x2="180" y2="369" stroke="#A0C8E8" stroke-width="1.5"/>
+  <rect x="250" y="356" width="28" height="22" rx="4" fill="#C8E8FF" opacity="0.8"/>
+  <line x1="264" y1="356" x2="264" y2="378" stroke="#A0C8E8" stroke-width="1.5"/>
+  <line x1="250" y1="367" x2="278" y2="367" stroke="#A0C8E8" stroke-width="1.5"/>
+  <!-- Gota back HOME inside cloud, surrounded by tiny friend drops -->
+  <!-- Gota center, happy and full -->
+  <path d="M215,298 Q194,328 194,350 Q194,378 215,385 Q236,378 236,350 Q236,328 215,298Z" fill="#50B8E0"/>
+  <path d="M215,300 Q197,328 197,350 Q197,376 215,382 Q233,376 233,350 Q233,328 215,300Z" fill="#78CFF0"/>
+  <!-- happiest eyes ever -->
+  <path d="M206 345 Q211 339 216 345" stroke="#1A5A7A" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+  <path d="M214 345 Q219 339 224 345" stroke="#1A5A7A" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+  <!-- huge smile -->
+  <path d="M205 358 Q215 372 225 358" stroke="#1A5A7A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="200" cy="353" r="7" fill="#FFB0C0" opacity="0.6"/>
+  <circle cx="230" cy="353" r="7" fill="#FFB0C0" opacity="0.6"/>
+  <!-- shine on gota -->
+  <ellipse cx="204" cy="318" rx="8" ry="14" fill="#fff" opacity="0.35" transform="rotate(-18 204 318)"/>
+  <!-- arms hugging friends/world -->
+  <ellipse cx="183" cy="352" rx="24" ry="10" fill="#50B8E0" transform="rotate(-15 183 352)"/>
+  <ellipse cx="247" cy="348" rx="24" ry="10" fill="#50B8E0" transform="rotate(15 247 348)"/>
+  <!-- friend drops around -->
+  <!-- drop friend 1 -->
+  <path d="M152,320 Q144,332 144,340 Q144,350 152,353 Q160,350 160,340 Q160,332 152,320Z" fill="#60C8E8"/>
+  <ellipse cx="148" cy="339" rx="3.5" ry="4" fill="#1A5A7A"/>
+  <ellipse cx="156" cy="339" rx="3.5" ry="4" fill="#1A5A7A"/>
+  <path d="M148 345 Q152 349 156 345" stroke="#1A5A7A" stroke-width="1.5" fill="none"/>
+  <!-- drop friend 2 -->
+  <path d="M278,316 Q270,328 270,336 Q270,346 278,349 Q286,346 286,336 Q286,328 278,316Z" fill="#60C8E8"/>
+  <ellipse cx="274" cy="335" rx="3.5" ry="4" fill="#1A5A7A"/>
+  <ellipse cx="282" cy="335" rx="3.5" ry="4" fill="#1A5A7A"/>
+  <path d="M274 341 Q278 345 282 341" stroke="#1A5A7A" stroke-width="1.5" fill="none"/>
+  <!-- drop friend 3 small up top -->
+  <path d="M215,272 Q210,280 210,285 Q210,292 215,294 Q220,292 220,285 Q220,280 215,272Z" fill="#70D0F0"/>
+  <ellipse cx="212" cy="284" rx="2.5" ry="3" fill="#1A5A7A"/>
+  <ellipse cx="218" cy="284" rx="2.5" ry="3" fill="#1A5A7A"/>
+  <path d="M212 289 Q215 292 218 289" stroke="#1A5A7A" stroke-width="1.2" fill="none"/>
+  <!-- sparkles of joy all around -->
+  <text x="145" y="295" font-size="16" fill="#C0EEFF" opacity="0.8">✦</text>
+  <text x="275" y="290" font-size="14" fill="#C0EEFF" opacity="0.7">✦</text>
+  <text x="148" y="375" font-size="12" fill="#C0EEFF" opacity="0.7">✦</text>
+  <text x="280" y="370" font-size="13" fill="#C0EEFF" opacity="0.65">✦</text>
+  <!-- title of end text area -->
+  <rect x="30" y="650" width="370" height="180" rx="22" fill="rgba(0,30,70,0.4)"/>
+  <text x="215" y="700" text-anchor="middle" font-size="17" fill="#A0D4F0" font-family="Nunito,sans-serif" font-weight="700">E Gota entendeu uma coisa</text>
+  <text x="215" y="724" text-anchor="middle" font-size="17" fill="#A0D4F0" font-family="Nunito,sans-serif" font-weight="700">muito importante naquele dia:</text>
+  <text x="215" y="766" text-anchor="middle" font-size="22" fill="#C0EEFF" font-family="Fredoka One,cursive">viajar é lindo,</text>
+  <text x="215" y="796" text-anchor="middle" font-size="22" fill="#C0EEFF" font-family="Fredoka One,cursive">mas voltar pra casa</text>
+  <text x="215" y="826" text-anchor="middle" font-size="22" fill="#C0EEFF" font-family="Fredoka One,cursive">é ainda mais gostoso.</text>
+  <!-- stars decorative -->
+  <text x="88" y="848" font-size="13" fill="#C0EEFF" opacity="0.7" text-anchor="middle">✦</text>
+  <text x="215" y="855" font-size="13" fill="#C0EEFF" opacity="0.7" text-anchor="middle">✦</text>
+  <text x="342" y="848" font-size="13" fill="#C0EEFF" opacity="0.7" text-anchor="middle">✦</text>
+</svg>
+<!-- Botão Início -->
+<div style="position:absolute;bottom:44px;left:50%;transform:translateX(-50%);z-index:10;">
+  <button onclick="showPage(0,-1)" style="
+    font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;
+    color:#0A3A5A;background:rgba(192,238,255,0.92);border:none;
+    border-radius:50px;padding:12px 32px;cursor:pointer;
+    letter-spacing:0.04em;box-shadow:0 4px 18px rgba(0,0,0,0.4);
+    display:flex;align-items:center;gap:8px;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A3A5A" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Início
+  </button>
+</div>
+</div>
+
+</div><!-- /book -->
+</div><!-- /app -->
+
+<!-- NAV ARROWS -->
+<div class="tap-prev" onclick="if(!animating&&current>0)showPage(current-1,-1)" aria-label="Página anterior">
+  <div class="tap-arrow"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
+</div>
+<div class="tap-next" onclick="if(!animating&&current<TOTAL-1)showPage(current+1,1)" aria-label="Próxima página">
+  <div class="tap-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</div>
+
+<!-- DOTS -->
+<div id="dots"></div>
+
+<script>
+const TOTAL = 18;
+const BOOK_TITLE = 'A Gotinha Gota';
+
+let current=0,startX=0,startY=0,dragging=false,swipeLocked=false,animating=false;
+
+document.querySelectorAll('.page').forEach((p,i)=>{
+  if(i===0){p.style.visibility='visible';p.style.opacity='1';p.style.transform='translateX(0)';p.style.pointerEvents='all';p.classList.add('active');}
+  else{p.style.visibility='hidden';p.style.opacity='0';p.style.transform='translateX(0)';p.style.pointerEvents='none';p.classList.remove('active');}
+});
+
+function getPage(n){return document.getElementById('page-'+n)}
+
+function showPage(n,dir){
+  if(animating||n===current)return;
+  if(n<0||n>=TOTAL)return;
+  const outPage=getPage(current),inPage=getPage(n);
+  if(!outPage||!inPage)return;
+  animating=true;
+  const dur=340;
+  inPage.style.transition='none';
+  inPage.style.visibility='visible';
+  inPage.style.opacity='1';
+  inPage.style.transform=dir>0?'translateX(100%)':'translateX(-100%)';
+  inPage.style.pointerEvents='none';
+  inPage.getBoundingClientRect();
+  const t=`transform ${dur}ms cubic-bezier(0.4,0,0.2,1)`;
+  outPage.style.transition=t;inPage.style.transition=t;
+  outPage.style.transform=dir>0?'translateX(-100%)':'translateX(100%)';
+  inPage.style.transform='translateX(0)';
+  setTimeout(()=>{
+    outPage.style.transition='none';outPage.style.transform='translateX(0)';
+    outPage.style.visibility='hidden';outPage.style.opacity='0';outPage.style.pointerEvents='none';
+    outPage.classList.remove('active');
+    inPage.style.transition='none';inPage.style.transform='translateX(0)';
+    inPage.style.visibility='visible';inPage.style.opacity='1';inPage.style.pointerEvents='all';
+    inPage.classList.add('active');
+    current=n;animating=false;updateDots();
+  },dur+20);
+}
+
+function updateDots(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===current));}
+
+const dotContainer=document.getElementById('dots');
+for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='dot'+(i===0?' active':'');dotContainer.appendChild(d);}
+
+const book=document.getElementById('book');
+book.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;startY=e.touches[0].clientY;dragging=true;swipeLocked=false;},{passive:true});
+book.addEventListener('touchmove',e=>{if(!dragging)return;const dx=e.touches[0].clientX-startX,dy=e.touches[0].clientY-startY;if(!swipeLocked&&Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>10){swipeLocked=true;e.preventDefault();}},{passive:false});
+book.addEventListener('touchend',e=>{if(!dragging)return;const dx=e.changedTouches[0].clientX-startX,dy=e.changedTouches[0].clientY-startY;if(!animating&&Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.2){if(dx<0&&current<TOTAL-1)showPage(current+1,1);else if(dx>0&&current>0)showPage(current-1,-1);}dragging=false;swipeLocked=false;},{passive:true});
+book.addEventListener('mousedown',e=>{startX=e.clientX;dragging=true;});
+book.addEventListener('mouseup',e=>{if(!dragging)return;const dx=e.clientX-startX;if(!animating&&Math.abs(dx)>50){if(dx<0&&current<TOTAL-1)showPage(current+1,1);else if(dx>0&&current>0)showPage(current-1,-1);}dragging=false;});
+document.addEventListener('keydown',e=>{if(animating)return;if(e.key==='ArrowRight'&&current<TOTAL-1)showPage(current+1,1);if(e.key==='ArrowLeft'&&current>0)showPage(current-1,-1);});
+</script>
+</body>
+</html>
