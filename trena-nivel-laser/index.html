@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trena Nível a Laser Pro3 – Medição Profissional em 1 Ferramenta</title>
+<meta name="description" content="Trena Nível Laser Pro3: 4 ferramentas em 1. Trena, nível de bolha, régua e laser. Entrega em 24h, pague na entrega. Frete grátis.">
+<!-- Open Graph -->
+<meta property="og:title" content="Trena Nível a Laser Pro3 – Medição Profissional em 1 Ferramenta">
+<meta property="og:description" content="4 ferramentas em 1: Trena, Nível de Bolha, Régua e Laser. Entrega em 24h, pague na entrega. Frete grátis.">
+<meta property="og:type" content="product">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18148907605"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-18148907605');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet"></noscript>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#f5f7fa;color:#1a1a2e;-webkit-text-size-adjust:100%;}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#0a0a1e 0%,#111133 55%,#1a2a6c 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 20px 60px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:30px 30px;pointer-events:none;}
+
+/* Efeito raio laser decorativo */
+.laser-line{position:absolute;height:2px;background:linear-gradient(90deg,transparent,rgba(255,60,60,.0),rgba(255,60,60,.7),rgba(255,60,60,.0),transparent);width:100%;top:40%;pointer-events:none;animation:laserSweep 4s ease-in-out infinite;}
+.laser-line-v{position:absolute;width:2px;background:linear-gradient(180deg,transparent,rgba(255,60,60,.5),transparent);height:70%;left:50%;top:15%;pointer-events:none;animation:laserSweepV 4s ease-in-out infinite 1s;}
+@keyframes laserSweep{0%,100%{opacity:0;transform:scaleX(.3);}50%{opacity:1;transform:scaleX(1);}}
+@keyframes laserSweepV{0%,100%{opacity:0;transform:scaleY(.3);}50%{opacity:1;transform:scaleY(1);}}
+
+.entrega-banner{background:linear-gradient(135deg,#ff6b00,#cc4400);color:#fff;font-size:clamp(.85rem,3.5vw,1.05rem);font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:12px 24px;border-radius:12px;display:inline-block;margin-bottom:24px;box-shadow:0 6px 24px rgba(255,107,0,.6);border:2px solid rgba(255,255,255,.25);animation:bannerPop 1.8s ease-in-out infinite;max-width:90vw;text-decoration:none;position:relative;z-index:2;}
+@keyframes bannerPop{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
+
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,8vw,4rem);color:#fff;line-height:1.1;margin-bottom:12px;position:relative;z-index:2;}
+.hero h1 span{color:#ff3c3c;text-shadow:0 0 20px rgba(255,60,60,.5);}
+.hero h1 em{color:#ffd700;font-style:normal;}
+
+.subtitle{font-size:clamp(.95rem,3.5vw,1.2rem);color:rgba(255,255,255,.85);max-width:500px;margin:0 auto 28px;line-height:1.6;position:relative;z-index:2;}
+
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;position:relative;z-index:2;}
+.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,215,0,.4);color:#ffd700;padding:5px 14px;border-radius:50px;font-size:.78rem;font-weight:700;letter-spacing:.5px;}
+
+.product-img{width:min(420px,88vw);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.8);margin:20px auto;display:block;border:3px solid rgba(255,60,60,.4);position:relative;z-index:2;}
+
+.price-box{background:rgba(255,255,255,.1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,215,0,.4);border-radius:16px;padding:16px 32px;display:inline-block;margin-bottom:16px;position:relative;z-index:2;}
+.price-old{color:rgba(255,255,255,.55);text-decoration:line-through;font-size:.95rem;}
+.price-new{color:#ffd700;font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;line-height:1;}
+.price-label{color:rgba(255,255,255,.75);font-size:.82rem;margin-top:4px;}
+
+.stock{display:inline-block;background:#fff3cd;color:#856404;border:1px solid #ffc107;border-radius:8px;padding:6px 14px;font-size:.82rem;font-weight:700;margin-bottom:20px;position:relative;z-index:2;}
+
+/* CTA BUTTON */
+.btn{display:inline-block;background:linear-gradient(135deg,#ff3c00,#cc1a00);color:#fff;font-weight:800;font-size:clamp(1rem,4vw,1.15rem);letter-spacing:1.5px;text-transform:uppercase;padding:18px 44px;border-radius:50px;text-decoration:none;margin:8px;position:relative;overflow:hidden;animation:ctaPulse 1.6s ease-in-out infinite;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.btn::after{content:"";position:absolute;top:0;left:-100%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:ctaShine 2.2s ease-in-out infinite;pointer-events:none;}
+@keyframes ctaShine{0%{left:-100%;}55%,100%{left:150%;}}
+@keyframes ctaPulse{0%,100%{transform:scale(1);box-shadow:0 6px 24px rgba(255,60,0,.6),0 0 0 0 rgba(255,60,0,.45);}50%{transform:scale(1.05);box-shadow:0 10px 32px rgba(255,60,0,.85),0 0 0 16px rgba(255,60,0,0);}}
+.btn:active{transform:scale(.97);}
+.btn.gold{background:linear-gradient(135deg,#f0c040,#d4a020);color:#1a1118;animation:ctaPulseGold 1.6s ease-in-out infinite;}
+@keyframes ctaPulseGold{0%,100%{transform:scale(1);box-shadow:0 6px 24px rgba(212,168,83,.6),0 0 0 0 rgba(212,168,83,.4);}50%{transform:scale(1.05);box-shadow:0 10px 32px rgba(212,168,83,.85),0 0 0 16px rgba(212,168,83,0);}}
+
+.entrega-confirm{font-size:.95rem;font-weight:600;color:rgba(255,255,255,.95);margin-top:12px;position:relative;z-index:2;}
+
+/* 4 EM 1 SECTION */
+.features{background:#fff;padding:56px 20px;}
+.features-inner{max-width:840px;margin:0 auto;}
+.section-label{text-align:center;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#1a2a6c;margin-bottom:10px;}
+.section-title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.6rem,5vw,2.6rem);color:#1a1a2e;margin:0 0 40px;}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,1fr);}}
+.card{background:linear-gradient(135deg,#eef2ff,#dde6ff);border-radius:16px;padding:24px 16px;text-align:center;border:1px solid rgba(26,42,108,.1);}
+.card-icon{font-size:2.2rem;margin-bottom:10px;}
+.card-title{font-weight:700;font-size:.95rem;color:#1a1a2e;margin-bottom:6px;}
+.card-desc{font-size:.82rem;color:#3a4a8a;line-height:1.5;}
+
+/* USOS */
+.uses{background:#f0f4ff;padding:56px 20px;}
+.uses-inner{max-width:840px;margin:0 auto;}
+.uses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:32px;}
+@media(min-width:600px){.uses-grid{grid-template-columns:repeat(3,1fr);}}
+.use-item{background:#fff;border-radius:14px;padding:20px 16px;text-align:center;border:1px solid rgba(26,42,108,.08);box-shadow:0 2px 12px rgba(0,0,0,.04);}
+.use-item .icon{font-size:2rem;margin-bottom:10px;}
+.use-item strong{display:block;font-size:.92rem;color:#1a1a2e;margin-bottom:4px;}
+.use-item span{font-size:.8rem;color:#5a6aa0;}
+
+/* DESC + VIDEO */
+.desc{background:#fff;padding:56px 20px;}
+.desc-inner{max-width:740px;margin:0 auto;}
+.desc-inner h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2rem);color:#1a1a2e;margin-bottom:16px;}
+.desc-inner p{color:#4a5080;line-height:1.8;font-size:.97rem;margin-bottom:12px;}
+.spec-list{list-style:none;margin:20px 0;display:grid;gap:10px;}
+.spec-list li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:#3a4a8a;line-height:1.5;}
+.spec-list li::before{content:"✔";color:#1a2a6c;font-weight:900;flex-shrink:0;margin-top:1px;}
+
+.video-wrap{border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.15);aspect-ratio:9/16;margin:32px auto;max-width:320px;}
+.video-wrap iframe{width:100%;height:100%;border:none;display:block;}
+
+/* VIDEOS DEMO */
+.demo{background:linear-gradient(160deg,#0a0a1e 0%,#1a2a6c 100%);padding:56px 20px;text-align:center;}
+.demo .section-label{color:#ff3c3c;}
+.demo .section-title{color:#fff;margin-bottom:10px;}
+.demo-sub{color:rgba(255,255,255,.75);font-size:.95rem;margin-bottom:32px;}
+.videos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:720px;margin:0 auto 36px;}
+.video-card{border-radius:14px;overflow:hidden;aspect-ratio:9/16;position:relative;box-shadow:0 8px 24px rgba(0,0,0,.5);border:2px solid rgba(255,60,60,.25);background:#000;}
+.video-card iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block;}
+
+/* PAYMENT */
+.payment{background:linear-gradient(160deg,#0a0a1e,#1a2a6c);padding:56px 20px;text-align:center;}
+.payment h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,5vw,2.6rem);color:#fff;margin-bottom:14px;}
+.payment p{color:rgba(255,255,255,.85);font-size:1rem;max-width:480px;margin:0 auto 32px;line-height:1.7;}
+.tags{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
+.tag{background:rgba(255,255,255,.1);border:1px solid rgba(255,215,0,.4);color:#fff;padding:7px 16px;border-radius:50px;font-size:.82rem;}
+
+/* FOOTER CTA */
+.footer-cta{background:#eef2ff;padding:48px 20px;text-align:center;}
+.footer-cta p{font-size:.88rem;color:#3a4a8a;margin-top:14px;}
+
+/* COMPANY FOOTER */
+.co-footer{background:#0d0d0d;padding:36px 20px;text-align:center;border-top:1px solid rgba(255,215,0,.2);}
+.co-inner{max-width:600px;margin:0 auto;}
+.co-brand{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:#ffd700;margin-bottom:14px;letter-spacing:1px;}
+.co-divider{width:40px;height:1px;background:rgba(255,215,0,.3);margin:14px auto;}
+.co-info{color:rgba(255,255,255,.55);font-size:.78rem;line-height:2;}
+.co-info a{color:rgba(255,255,255,.55);text-decoration:none;}
+.co-rights{color:rgba(255,255,255,.28);font-size:.72rem;margin-top:12px;line-height:1.8;}
+
+/* YouTube Facade */
+.yt-facade{position:relative;cursor:pointer;background:#000;width:100%;height:100%;}
+.yt-facade img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85;}
+.yt-facade .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(255,0,0,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .2s;}
+.yt-facade .play-btn::after{content:"";border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #fff;margin-left:4px;}
+.yt-facade:hover .play-btn{transform:translate(-50%,-50%) scale(1.12);}
+
+/* WHATSAPP FIXO */
+.wa-btn{position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;align-items:center;justify-content:center;width:56px;height:56px;background:#25d366;border-radius:50%;box-shadow:0 6px 20px rgba(37,211,102,.55);-webkit-tap-highlight-color:transparent;}
+.wa-btn svg{width:28px;height:28px;fill:#fff;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="laser-line"></div>
+  <div class="laser-line-v"></div>
+
+  <a class="entrega-banner" href="https://entrega.logzz.com.br/pay/memrd7y5r/trena-nivel-a-laser-x" target="_blank">&#x1F69A; PAGUE NA ENTREGA &mdash; VOC&Ecirc; N&Atilde;O PAGA NADA AGORA!</a>
+
+  <h1>Trena <em>N&iacute;vel</em><br>a <span>Laser</span> Pro3</h1>
+  <p class="subtitle">4 ferramentas em 1: trena, n&iacute;vel, r&eacute;gua e laser de prec&aring;o. Obra, m&oacute;veis e decora&ccedil;&atilde;o sempre no prumo.</p>
+
+  <div class="badges">
+    <span class="badge">&#x1F4CF; TRENA 2,5m</span>
+    <span class="badge">🔴 LASER AT&Eacute; 8m</span>
+    <span class="badge">&#x1F4D0; R&Eacute;GUA 15cm</span>
+    <span class="badge">🫧 3 N&Iacute;VEIS DE BOLHA</span>
+  </div>
+
+  <img class="product-img" width="420" height="420"
+    src="img/01.webp"
+    alt="Trena Nível Laser Pro3 – Ferramenta 4 em 1">
+
+  <div class="price-box">
+    <div class="price-old">de R$ 199,90</div>
+    <div class="price-new">R$ 149,90</div>
+    <div class="price-label">&#x1F381; Frete Gr&aacute;tis + 6 baterias de brinde</div>
+  </div>
+
+  <div class="stock">&#x26A1; Estoque Limitado &mdash; Garanta o seu!</div><br>
+
+  <a class="btn" href="https://entrega.logzz.com.br/pay/memrd7y5r/trena-nivel-a-laser-x" target="_blank">QUERO APROVEITAR A OFERTA</a>
+  <p class="entrega-confirm">&#x2705; Sem cart&atilde;o. Sem risco. Pague ao entregador na sua porta.</p>
+</section>
+
+<!-- 4 EM 1 -->
+<section class="features">
+  <div class="features-inner">
+    <div class="section-label">4 ferramentas em 1</div>
+    <h2 class="section-title">Tudo que voc&ecirc; precisa<br>numa s&oacute; ferramenta</h2>
+    <div class="grid">
+      <div class="card"><div class="card-icon">🔴</div><div class="card-title">Laser Preciso</div><div class="card-desc">3 modos: horizontal, vertical e cruzado. Alcance de at&eacute; 8 metros</div></div>
+      <div class="card"><div class="card-icon">📏</div><div class="card-title">Trena 2,5m</div><div class="card-desc">Trena retr&aacute;til com trava, ideal para medi&ccedil;&otilde;es r&aacute;pidas e precisas</div></div>
+      <div class="card"><div class="card-icon">🫧</div><div class="card-title">N&iacute;vel de Bolha</div><div class="card-desc">3 posi&ccedil;&otilde;es (horizontal, vertical e diagonal) para garantir o prumo perfeito</div></div>
+      <div class="card"><div class="card-icon">📐</div><div class="card-title">R&eacute;gua 15cm</div><div class="card-desc">R&eacute;gua integrada em cm e polegadas para marcar e riscar na hora</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- USOS -->
+<section class="uses">
+  <div class="uses-inner">
+    <div class="section-label">Onde usar</div>
+    <h2 class="section-title">Do profissional ao<br>uso dom&eacute;stico</h2>
+    <div class="uses-grid">
+      <div class="use-item"><div class="icon">🧱</div><strong>Obras e Reformas</strong><span>Alinha azulejo, tijolo e reboco com precis&atilde;o</span></div>
+      <div class="use-item"><div class="icon">🪵</div><strong>M&oacute;veis Planejados</strong><span>Instala armários e niveladores sem erro</span></div>
+      <div class="use-item"><div class="icon">⚡</div><strong>El&eacute;trica</strong><span>Marca tomadas e interruptores na linha certa</span></div>
+      <div class="use-item"><div class="icon">🖼️</div><strong>Decora&ccedil;&atilde;o</strong><span>Quadros, prateleiras e pendentes sempre retos</span></div>
+      <div class="use-item"><div class="icon">🔧</div><strong>Manuten&ccedil;&atilde;o</strong><span>Qualquer servi&ccedil;o que exija prumo e nivelamento</span></div>
+      <div class="use-item"><div class="icon">🏠</div><strong>Uso Dom&eacute;stico</strong><span>F&aacute;cil de usar mesmo por quem n&atilde;o &eacute; profissional</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DESCRIÇÃO -->
+<section class="desc">
+  <div class="desc-inner">
+    <h2>A ferramenta que profissional<br>nenhum larga mais</h2>
+    <p>Pedreiro, eletricista, marceneiro, montador de m&oacute;veis &mdash; quem trabalha com precis&atilde;o sabe: cada centímetro fora do lugar vira retrabalho. A Trena N&iacute;vel Laser Pro3 foi criada exatamente para acabar com esse problema de uma vez por todas.</p>
+    <p>Com o laser vermelho você projeta linhas horizontais, verticais ou cruzadas na parede e no ch&atilde;o &mdash; e trabalha com as duas m&atilde;os livres. Sem risco de medir errado, sem fio torto, sem armário corcunda.</p>
+    <p>E o melhor: cabe no bolso. Vai com você para qualquer canto da obra ou do apartamento, sem carregar peso &agrave; toa.</p>
+
+    <ul class="spec-list">
+      <li>Laser vermelho com alcance de at&eacute; 8 metros</li>
+      <li>3 modos de proje&ccedil;&atilde;o: linha horizontal, vertical e cruzada</li>
+      <li>Trena retr&aacute;til de 2,5m com trava</li>
+      <li>R&eacute;gua de 15cm em cm e polegadas</li>
+      <li>3 n&iacute;veis de bolha (horizontal, vertical e diagonal)</li>
+      <li>Acompanha 6 baterias AG13 de brinde (4 meses cada)</li>
+      <li>Suporte para trip&eacute; de celular (tripé n&atilde;o incluso)</li>
+      <li>Peso: 180g &mdash; leve e compacta</li>
+    </ul>
+
+    <!-- Galeria de fotos do produto -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:28px 0;">
+      <img src="img/03.webp" alt="Laser projeção" style="width:100%;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.12);">
+      <img src="img/05.webp" alt="3 modos laser" style="width:100%;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.12);">
+      <img src="img/09.webp" alt="Laser Level Pro3" style="width:100%;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.12);">
+      <img src="img/04.webp" alt="Uso em móveis" style="width:100%;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.12);">
+      <img src="img/06.webp" alt="Linha vertical" style="width:100%;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.12);">
+      <img src="img/08.webp" alt="Múltiplos usos" style="width:100%;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.12);">
+    </div>
+    <div style="text-align:center;margin-top:28px;">
+      <a class="btn" href="https://entrega.logzz.com.br/pay/memrd7y5r/trena-nivel-a-laser-x" target="_blank">GARANTIR O MEU</a>
+    </div>
+
+    <div class="video-wrap">
+      <div class="yt-facade" data-id="VIDEO_ID_1">
+        <img src="https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="Demonstra&ccedil;&atilde;o Trena N&iacute;vel Laser" loading="lazy" width="480" height="270">
+        <div class="play-btn"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VÍDEOS DE DEMONSTRAÇÃO -->
+<section class="demo">
+  <div class="section-label">Veja funcionando</div>
+  <h2 class="section-title">Precis&atilde;o laser<br>na pr&aacute;tica</h2>
+  <p class="demo-sub">&#x1F3AF; Profissionais reais usando no dia a dia</p>
+
+  <div class="videos-grid">
+    <div class="video-card">
+      <div class="yt-facade" data-id="VIDEO_ID_2">
+        <img src="https://i.ytimg.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="Demo" loading="lazy" width="480" height="270">
+        <div class="play-btn"></div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="yt-facade" data-id="VIDEO_ID_3">
+        <img src="https://i.ytimg.com/vi/VIDEO_ID_3/hqdefault.jpg" alt="Demo" loading="lazy" width="480" height="270">
+        <div class="play-btn"></div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="yt-facade" data-id="VIDEO_ID_4">
+        <img src="https://i.ytimg.com/vi/VIDEO_ID_4/hqdefault.jpg" alt="Demo" loading="lazy" width="480" height="270">
+        <div class="play-btn"></div>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="yt-facade" data-id="VIDEO_ID_1">
+        <img src="https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="Demo" loading="lazy" width="480" height="270">
+        <div class="play-btn"></div>
+      </div>
+    </div>
+  </div>
+
+  <a class="btn" href="https://entrega.logzz.com.br/pay/memrd7y5r/trena-nivel-a-laser-x" target="_blank">QUERO O MEU AGORA</a>
+</section>
+
+<!-- PAGAMENTO / ENTREGA -->
+<section class="payment">
+  <h2>Estoque Local.<br>Entrega em 24h.</h2>
+  <p>Voc&ecirc; n&atilde;o precisa pagar nada agora! O pagamento voc&ecirc; acerta diretamente com o entregador na hora da entrega &mdash; em dinheiro, PIX ou cart&atilde;o em at&eacute; 12x.</p>
+  <div class="tags">
+    <span class="tag">&#x1F69A; Frete Gr&aacute;tis</span>
+    <span class="tag">&#x1F4B3; Pague na Entrega</span>
+    <span class="tag">&#x1F4E6; Estoque Local</span>
+    <span class="tag">&#x26A1; Entrega em 24h</span>
+    <span class="tag">&#x1F381; 6 Baterias de Brinde</span>
+  </div>
+  <a class="btn gold" href="https://entrega.logzz.com.br/pay/memrd7y5r/trena-nivel-a-laser-x" target="_blank">AGENDAR MINHA ENTREGA</a>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <div class="section-label">D&uacute;vidas?</div>
+  <h2 class="section-title" style="margin-bottom:18px">Fale com nossa equipe</h2>
+  <a class="btn" href="https://wa.me/553192924428" target="_blank">&#x1F4AC; Chamar no WhatsApp</a>
+  <p>Atendimento r&aacute;pido e humanizado</p>
+</section>
+
+<!-- FOOTER EMPRESA -->
+<footer class="co-footer">
+  <div class="co-inner">
+    <div class="co-brand">Tudomix Brasil</div>
+    <div class="co-divider"></div>
+    <div class="co-info">
+      S&atilde;o Paulo &mdash; SP &bull; CEP 01.031-902<br>
+      CNPJ 48.194.871/0002-09<br>
+      <a href="https://wa.me/553192924428" target="_blank">WhatsApp: (31) 9292-4428</a>
+    </div>
+    <div class="co-divider"></div>
+    <div class="co-rights">
+      &copy; 2025 Tudomix Brasil &mdash; Todos os direitos reservados.<br>
+      Seus dados s&atilde;o protegidos e tratados com total sigilo e seguran&ccedil;a.<br>
+      Em conformidade com a LGPD &mdash; Lei Geral de Prote&ccedil;&atilde;o de Dados Pessoais.
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp fixo -->
+<a class="wa-btn" href="https://wa.me/553192924428" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M224 122.8c-72.7 0-131.8 59.1-131.9 131.8 0 24.9 7 49.2 20.2 70.1l3.1 5-13.3 48.6 49.9-13.1 4.8 2.9c20.2 12 43.4 18.4 67.1 18.4h.1c72.6 0 133.3-59.1 133.3-131.8 0-35.2-15.2-68.3-40.1-93.2-25-25-58-38.7-93.2-38.7zm77.5 188.4c-3.3 9.3-19.1 17.7-26.7 18.8-12.6 1.9-22.4.9-47.5-9.9-39.7-17.2-65.7-57.2-67.7-59.8-2-2.6-16.2-21.5-16.2-41s10.2-29.1 13.9-33.1c3.6-4 7.9-5 10.6-5 2.6 0 5.3 0 7.6.1 2.4.1 5.7-.9 8.9 6.8 3.3 7.9 11.2 27.4 12.2 29.4s1.7 4.3.3 6.9c-7.6 15.2-15.7 14.6-11.6 21.6 15.3 26.3 30.6 35.4 53.9 47.1 4 2 6.3 1.7 8.6-1 2.3-2.6 9.9-11.6 12.5-15.5 2.6-4 5.3-3.3 8.9-2 3.6 1.3 23.1 10.9 27.1 12.9s6.6 3 7.6 4.6c.9 1.9.9 9.9-2.4 19.1zM400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM223.9 413.2c-26.6 0-52.7-6.7-75.8-19.3L64 416l22.5-82.2c-13.9-24-21.2-51.3-21.2-79.3C65.4 167.1 136.5 96 223.9 96c42.4 0 82.2 16.5 112.2 46.5 29.9 30 47.9 69.8 47.9 112.2 0 87.4-72.7 158.5-160.1 158.5z"/></svg>
+</a>
+
+<script>
+document.querySelectorAll(".yt-facade").forEach(function(el){
+  el.addEventListener("click",function(){
+    var id=el.dataset.id;
+    var iframe=document.createElement("iframe");
+    iframe.src="https://www.youtube.com/embed/"+id+"?autoplay=1&rel=0";
+    iframe.allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope";
+    iframe.allowFullscreen=true;
+    iframe.style.cssText="position:absolute;top:0;left:0;width:100%;height:100%;border:none;";
+    el.parentNode.style.position="relative";
+    el.replaceWith(iframe);
+  });
+});
+</script>
+
+</body>
+</html>
