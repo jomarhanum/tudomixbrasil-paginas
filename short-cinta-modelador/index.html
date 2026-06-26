@@ -65,8 +65,8 @@ body{font-family:'DM Sans',sans-serif;background:#fdf8f5;color:#1a1118;-webkit-t
 .desc-inner{max-width:740px;margin:0 auto;}
 .desc-inner h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2rem);color:#1a1118;margin-bottom:16px;}
 .desc-inner p{color:#5c4a57;line-height:1.8;font-size:.97rem;margin-bottom:12px;}
-.video-wrap{border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.15);aspect-ratio:9/16;margin:32px auto;max-width:320px;}
-.video-wrap iframe{width:100%;height:100%;border:none;display:block;}
+.video-wrap{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.15);aspect-ratio:9/16;margin:32px auto;max-width:320px;}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block;}
 
 /* SIZES */
 .sizes{background:#fff;padding:56px 20px;text-align:center;}
@@ -154,7 +154,10 @@ body{font-family:'DM Sans',sans-serif;background:#fdf8f5;color:#1a1118;-webkit-t
       <a class="btn" href="https://entrega.logzz.com.br/pay/mem6004v8/01-cinta-oficial" target="_blank">GARANTIR O MEU</a>
     </div>
     <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/AKJtiMkZEKw" allowfullscreen loading="lazy"></iframe>
+      <div class="yt-facade" data-id="0PWcYF827X0" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+        <img src="https://i.ytimg.com/vi/0PWcYF827X0/hqdefault.jpg" alt="Vídeo do produto" loading="lazy" width="480" height="270" style="width:100%;height:100%;object-fit:cover;">
+        <div class="play-btn"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -175,7 +178,6 @@ body{font-family:'DM Sans',sans-serif;background:#fdf8f5;color:#1a1118;-webkit-t
     <div class="video-card"><div class="yt-facade" data-id="14vSSGHMxiY"><img src="https://i.ytimg.com/vi/14vSSGHMxiY/hqdefault.jpg" alt="Video" loading="lazy" width="480" height="270"><div class="play-btn"></div></div></div>
     <div class="video-card"><div class="yt-facade" data-id="RgB3N0-UAT4"><img src="https://i.ytimg.com/vi/RgB3N0-UAT4/hqdefault.jpg" alt="Video" loading="lazy" width="480" height="270"><div class="play-btn"></div></div></div>
     <div class="video-card"><div class="yt-facade" data-id="jsrygK_74bU"><img src="https://i.ytimg.com/vi/jsrygK_74bU/hqdefault.jpg" alt="Video" loading="lazy" width="480" height="270"><div class="play-btn"></div></div></div>
-    <div class="video-card"><div class="yt-facade" data-id="3DcBL1X-kzM"><img src="https://i.ytimg.com/vi/3DcBL1X-kzM/hqdefault.jpg" alt="Video" loading="lazy" width="480" height="270"><div class="play-btn"></div></div></div>
   </div>
   <a class="btn" href="https://entrega.logzz.com.br/pay/mem6004v8/01-cinta-oficial" target="_blank">QUERO O MEU AGORA</a>
 </section>
