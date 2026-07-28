@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -126,6 +127,18 @@ body{font-family:'DM Sans',sans-serif;background:#f5f7fa;color:#1a1a2e;-webkit-t
 .yt-facade .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(108,63,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .2s;}
 .yt-facade .play-btn::after{content:"";border-style:solid;border-width:9px 0 9px 18px;border-color:transparent transparent transparent #fff;margin-left:4px;}
 .yt-facade:hover .play-btn{transform:translate(-50%,-50%) scale(1.12);}
+
+/* FAQ */
+.faq{background:#fff;padding:56px 20px;}
+.faq-inner{max-width:720px;margin:0 auto;}
+.faq-item{border-bottom:1px solid rgba(108,63,255,.15);}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:18px 4px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.95rem;color:#1a1a2e;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;-webkit-tap-highlight-color:transparent;}
+.faq-q .icon{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#f0ecff;color:#6c3fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:transform .25s;}
+.faq-item.open .faq-q .icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-a p{padding:0 4px 18px;font-size:.88rem;color:#4a5080;line-height:1.7;}
+.faq-item.open .faq-a{max-height:400px;}
 
 /* PAYMENT */
 .payment{background:linear-gradient(160deg,#0a0612,#1a0f35);padding:56px 20px;text-align:center;}
@@ -293,6 +306,83 @@ body{font-family:'DM Sans',sans-serif;background:#f5f7fa;color:#1a1a2e;-webkit-t
   <a class="btn" href="https://entrega.logzz.com.br/pay/memmopxqv/1-unidade-oculos-2v-pro------" target="_blank">QUERO O MEU AGORA</a>
 </section>
 
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq-inner">
+    <div class="section-label">Perguntas frequentes</div>
+    <h2 class="section-title">Ainda tem d&uacute;vidas?</h2>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>O &oacute;culos tem grau?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>N&atilde;o &eacute; um &oacute;culos de grau com prescri&ccedil;&atilde;o m&eacute;dica tradicional (sem eixo, sem cilindro). Ele usa uma lente com tecnologia anti luz azul que se adapta bem a graus baixos e moderados, principalmente para uso de perto &mdash; celular, leitura e computador. N&atilde;o substitui uma consulta com oftalmologista.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Serve para o meu grau?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>Funciona bem para miopia leve/moderada, hipermetropia e presbiopia (vista cansada), at&eacute; aproximadamente +3,50. Para quem j&aacute; usa grau elevado (acima de +4), a adapta&ccedil;&atilde;o pode n&atilde;o ser satisfat&oacute;ria.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>&Eacute; unissex? Serve para qualquer rosto?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>Sim, &eacute; modelo &uacute;nico e unissex, com design discreto sem aro que combina com diferentes formatos de rosto.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>De que material &eacute; feito?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>Lente em resina + acetato de celulose (n&atilde;o embaça) e arma&ccedil;&atilde;o reforçada em tit&acirc;nio + acetato. Leve e resistente para o uso di&aacute;rio.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Ajuda mesmo contra cansa&ccedil;o de tela?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>Sim, a lente filtra parte da luz azul emitida por telas, o que ajuda a reduzir o cansa&ccedil;o visual em uso prolongado.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Posso usar para dirigir?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>Pode ajudar no conforto visual, mas n&atilde;o &eacute; indicado como substituto de &oacute;culos de grau para dire&ccedil;&atilde;o caso voc&ecirc; j&aacute; tenha prescri&ccedil;&atilde;o m&eacute;dica para isso.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Quanto custa e como pago?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>R$ 129,90 (de R$ 189,90), com frete gr&aacute;tis. O pagamento &eacute; feito somente na entrega &mdash; em dinheiro, PIX ou cart&atilde;o de cr&eacute;dito em at&eacute; 12x.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Quanto tempo demora a entrega?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>At&eacute; 24 horas ap&oacute;s a confirma&ccedil;&atilde;o do pedido, com entregas das 9h &agrave;s 19h. N&atilde;o &eacute; poss&iacute;vel agendar um hor&aacute;rio exato, apenas o dia.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Preciso pagar algo antes de receber?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>N&atilde;o. Voc&ecirc; s&oacute; paga quando o produto chegar nas suas m&atilde;os.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Posso devolver se n&atilde;o gostar?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>Sim. Por lei (C&oacute;digo de Defesa do Consumidor, Art. 49), como a compra &eacute; feita fora de loja f&iacute;sica, voc&ecirc; tem direito de arrependimento em at&eacute; 7 dias corridos ap&oacute;s o recebimento, mesmo sem defeito &mdash; sem precisar justificar o motivo. Entre em contato pelo WhatsApp dentro desse prazo para combinar a devolu&ccedil;&atilde;o.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Tem garantia?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>Sim, 30 dias de garantia contra defeitos de fabrica&ccedil;&atilde;o a partir da data de recebimento.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>O &oacute;culos vem com estojo?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>Vem em embalagem simples, sem estojo r&iacute;gido.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q"><span>Serve para crian&ccedil;as?</span><span class="icon">+</span></button>
+      <div class="faq-a"><p>N&atilde;o &eacute; recomendado &mdash; &eacute; um produto voltado para uso adulto.</p></div>
+    </div>
+
+    <div style="text-align:center;margin-top:32px;">
+      <a class="btn" href="https://entrega.logzz.com.br/pay/memmopxqv/1-unidade-oculos-2v-pro------" target="_blank">QUERO O MEU AGORA</a>
+    </div>
+  </div>
+</section>
+
 <!-- PAGAMENTO / ENTREGA -->
 <section class="payment">
   <h2>Estoque Local.<br>Entrega em 24h.</h2>
@@ -350,6 +440,17 @@ document.querySelectorAll(".yt-facade").forEach(function(el){
     iframe.style.cssText="position:absolute;top:0;left:0;width:100%;height:100%;border:none;";
     el.parentNode.style.position="relative";
     el.replaceWith(iframe);
+  });
+});
+
+document.querySelectorAll(".faq-item").forEach(function(item){
+  var q=item.querySelector(".faq-q");
+  q.addEventListener("click",function(){
+    var isOpen=item.classList.contains("open");
+    document.querySelectorAll(".faq-item.open").forEach(function(other){
+      if(other!==item) other.classList.remove("open");
+    });
+    item.classList.toggle("open", !isOpen);
   });
 });
 </script>
